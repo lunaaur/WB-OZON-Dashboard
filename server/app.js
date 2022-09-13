@@ -1,9 +1,10 @@
+require('@babel/register')
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors')
 const app = express();
 const morgan = require('morgan');
 const path = require('path');
-require('dotenv').config();
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 //импорт вспомогательных ф-й
