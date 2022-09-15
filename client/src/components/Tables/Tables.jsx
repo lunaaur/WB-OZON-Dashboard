@@ -41,13 +41,13 @@ const Tables = () => {
   return (
     <>
     <div className="container">
-      <div className="row justify-content-start text-center">
-        <div className='"col-4"'>
-            <div style={{ width: '30%' }}>
+      <div className="row justify-content-around text-center">
+        <div className="col-6">
+            <div style={{ width: '70%' }}>
             <LineChart chartData={userData} />
             </div>
 
-            <Table striped bordered hover style={{maxWidth:'30%'}}>
+            <Table striped bordered hover style={{maxWidth:'40%'}}>
          <thead>
         <tr>
             <th></th>
@@ -75,12 +75,12 @@ const Tables = () => {
             </Table>
         </div>
 
-        <div className='"col-4"'>
-          <div style={{ width: '30%' }}>
+        <div className="col-6">
+          <div style={{ width: '70%' }}>
           <LineChart chartData={userData} />
           </div>
 
-          <Table striped bordered hover style={{maxWidth:'30%'}}>
+          <Table striped bordered hover style={{maxWidth:'40%'}}>
          <thead>
         <tr>
             <th></th>
@@ -114,12 +114,12 @@ const Tables = () => {
         </div>
       </div>
 
-      {/* <div className="row justify-content-around text-center">
-          <div className='"col-md-4"'>
-              <div style={{ width: '30%' }}>
+      <div className="row justify-content-around text-center">
+          <div className="col-6">
+              <div style={{ width: '70%' }}>
               <LineChart chartData={userData} />
               </div>
-              <Table striped bordered hover style={{maxWidth:'15%'}}>
+              <Table striped bordered hover style={{maxWidth:'40%'}}>
              <thead>
             <tr>
                 <th></th>
@@ -146,17 +146,11 @@ const Tables = () => {
           </tbody>
               </Table>
           </div>
-      </div>
-
-
-
-        <div className="row d-flex flex-row justify-content-around text-center">
-
-    <div style={{ width: '30%' }}>
-    <LineChart chartData={userData} />
-    </div>
-
-            <Table striped bordered hover style={{maxWidth:'15%'}}>
+          <div className="col-6">
+            <div style={{ width: '70%' }}>
+              <LineChart chartData={userData} />
+            </div>
+              <Table striped bordered hover style={{maxWidth:'40%'}}>
              <thead>
             <tr>
                 <th></th>
@@ -181,10 +175,11 @@ const Tables = () => {
               <td>- 87 000р</td>
             </tr>
           </tbody>
-            </Table>
-            </div> */}
-            </div>
-            </>
+              </Table>
+          </div>
+      </div>
+    </div>
+    </>
   )
 }
 
