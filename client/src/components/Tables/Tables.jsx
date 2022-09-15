@@ -35,7 +35,7 @@ const Tables = () => {
             borderWidth: 2,
           },
         ],
-      }
+      },
       );
 
   return (
@@ -44,7 +44,29 @@ const Tables = () => {
       <div className="row justify-content-around text-center">
         <div className="col-6">
             <div style={{ width: '70%' }}>
-            <LineChart chartData={userData} />
+            <LineChart chartData={userData} options={{
+    plugins: {
+      autocolors: false,
+      annotation: {
+        annotations: {
+          line1: {
+            type: 'line',
+            yMin: 400,
+            yMax: 40000,
+            borderColor: 'rgb(255, 99, 132)',
+            borderWidth: 2,
+          },
+          line2: {
+            type: 'line',
+            yMin: 50000,
+            yMax: 60000,
+            borderColor: 'rgb(30, 144, 255)',
+            borderWidth: 2,
+          }
+        }
+      }
+    }
+  }}/>
             </div>
 
             <Table striped bordered hover style={{maxWidth:'40%'}}>
@@ -77,7 +99,22 @@ const Tables = () => {
 
         <div className="col-6">
           <div style={{ width: '70%' }}>
-          <LineChart chartData={userData} />
+          <LineChart chartData={userData} options={{
+    plugins: {
+      autocolors: false,
+      annotation: {
+        annotations: {
+          line1: {
+            type: 'line',
+            yMin: 40000,
+            yMax: 40,
+            borderColor: 'rgb(255, 99, 132)',
+            borderWidth: 2,
+          }
+        }
+      }
+    }
+  }}/>
           </div>
 
           <Table striped bordered hover style={{maxWidth:'40%'}}>
