@@ -1,12 +1,17 @@
 import React from 'react'
+import Header from '../../components/Header/Header.jsx';
+import Index from '../../components/Brief';
+import Table from '../../components/Tables/Tables'
 import s from './main.module.css'
 import api from '../../api/globalApi'
 
-export default function Main() {
-  let csvUrl = 'https://cdn1.ozone.ru/s3/item-picture-14/3d/6f/3d6fc365b3abd6ad14dedd1ae2abffb1.csv'
+const Main = () => {
   return (
-    <>
-    <div>Main</div>
-    </>
+    <div>
+      <Header/>
+      <Index/>
+    </div>
   )
 }
+
+export default Main;
