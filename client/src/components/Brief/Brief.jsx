@@ -2,6 +2,7 @@ import React from 'react';
 import { Nav, Navbar, Form, NavDropdown, Button, InputGroup} from 'react-bootstrap';
 import Tables from '../Tables/Tables';
 // import { Routes, Route } from 'react-router-dom;'
+import {dateTime} from '../../pages/main/helpers/getDate'
 
 const Brief = () => {
   return (
@@ -11,13 +12,13 @@ const Brief = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Button variant="outline-secondary" className="border border-secondary rounded text-dark bg-light" size="sm">Вчера</Button>
-            <Button variant="outline-secondary" className="border border-secondary rounded" size="sm">Неделя</Button>
-            <Button variant="outline-secondary" className="border border-secondary rounded" size="sm">Прошлая неделя</Button>
-            <Button variant="outline-secondary" className="border border-secondary rounded" size="sm">Месяц</Button>
-            <Button variant="outline-secondary" className="border border-secondary rounded" size="sm">30 дней</Button>
-            <Button variant="outline-secondary" className="border border-secondary rounded" size="sm">Прошлый месяц</Button>
-            <Button variant="outline-secondary" className="border border-secondary rounded" size="sm">90 дней</Button>
+            <Button variant="outline-secondary" className="border border-secondary rounded text-dark bg-light" size="sm" onClick={()=>dateTime('yesterday')}>Вчера</Button>
+            <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" onClick={()=>dateTime('week')}>Неделя</Button>
+            <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" onClick={()=>dateTime('last week')}>Прошлая неделя</Button>
+            <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" onClick={()=>dateTime('month')}>Месяц</Button>
+            <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" onClick={()=>dateTime('30 days')}>30 дней</Button>
+            <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" onClick={()=>dateTime('last month')}>Прошлый месяц</Button>
+            <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" onClick={()=>dateTime('90 days')}>90 дней</Button>
             
 
 {/* <Form className="border border-secondary rounded">
