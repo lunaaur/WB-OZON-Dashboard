@@ -11,7 +11,6 @@ const Brief = () => {
   const formHendler = (e) => {
     e.preventDefault()
     if (inputs.dateFrom && inputs.dateTo) {
-      console.log("res", inputs)
       getApiOzWb(e, inputs)
     }
     setInputs((prev) => ({
