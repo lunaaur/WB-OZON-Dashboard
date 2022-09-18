@@ -380,12 +380,12 @@ exports.apiRefOz = (req, res) => {
 }
 exports.apiLogOz = (req, res) => {
     // const ozon = await axios.post('', req.body);
-    console.log("Oz4------>",req.body)
+    // console.log("Oz4------>",req.body)
     res.json(testObj)
 }
 
 
-exports.apiSalesWb = async (req, res) => {
+exports.apiSalesRefWb = async (req, res) => {
     try {
         console.log("Wb1------>",req.body)
          const wb = await axios.get(`https://suppliers-stats.wildberries.ru/api/v1/supplier/sales?dateFrom=${req.body.date_from}&key=YTUzN2QxNmQtNjM4Ny00YzI0LWExNGYtODNjNGE1NGRmNjQ2`, {withCredentials: false });
