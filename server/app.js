@@ -20,6 +20,8 @@ app.use(morgan('dev'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+const getApi = require('./routers/ApiRouter')
+
 const corsOptions = {
   credentials: true, 
   origin: 'http://localhost:3000'
@@ -42,6 +44,7 @@ const sessionConfig = {
 app.use(session(sessionConfig));
 
 //роутеры
+app.use('/getapi', getApi)
 
 const PORT = process.env.PORT || 3100;
 app.listen(PORT, (err) => {

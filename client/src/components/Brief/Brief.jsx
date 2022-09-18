@@ -1,10 +1,20 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { Nav, Navbar, Form, NavDropdown, Button, InputGroup} from 'react-bootstrap';
 import Tables from '../Tables/Tables';
 // import { Routes, Route } from 'react-router-dom;'
 import {getApiOzWb} from '../../pages/main/API/endPointApi';
 
 const Brief = () => {
+
+  // const [{textInputFrom textInputTo}] = useRef(null)
+  
+
+  // function handleClick() {
+  // console.log(textInputFrom.current.value)
+  // console.log(textInputTo.current.value)
+
+  // }
+
   return (
     <>
     <Navbar bg="light" expand="sm" className="d-flex flex-row justify-content-around text-center">
@@ -30,7 +40,10 @@ const Brief = () => {
     </div>
   </div>
 </Form> */}
-<InputGroup className="border border-secondary rounded" style={{maxWidth: "30%"}}>
+
+
+
+<InputGroup type="submit" className="border border-secondary rounded" style={{maxWidth: "30%"}}>
       <Form.Control type="date"/>
       <Form.Control type="date"/>
       <Button variant="secondary">Выбрать</Button>
