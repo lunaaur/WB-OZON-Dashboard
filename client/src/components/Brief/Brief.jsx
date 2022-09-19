@@ -26,19 +26,21 @@ const Brief = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Button variant="outline-secondary" className="border border-secondary rounded text-dark bg-light" size="sm" data-time="yesterday" onClick={getApiOzWb}>Вчера</Button>
+            <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" data-time="yesterday" onClick={getApiOzWb}>Вчера</Button>
             <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" data-time="week" onClick={getApiOzWb}>Эта неделя</Button>
             <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" data-time="lastWeek" onClick={getApiOzWb}>Прошлая неделя</Button>
             <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" data-time="month" onClick={getApiOzWb}>Этот месяц</Button>
             <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" data-time="lastMonth" onClick={getApiOzWb}>Прошлый месяц</Button>
             <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" data-time="90Days" onClick={getApiOzWb}>90 дней</Button>
 
-            <Form onSubmit={formHendler} data-time="form" name="form" className="border border-secondary rounded">
+            <Form onSubmit={formHendler} data-time="form" name="form" className="border border-secondary rounded me-auto">
               <div className="input-group col-xs-3">
                 <input type="date" className="form-control" name="dateFrom" value={inputs.from} onChange={formHendler} style={{ border: "none" }} />
                 <input type="date" className="form-control" name="dateTo" value={inputs.to} onChange={formHendler} style={{ border: "none" }} />
                 <div className="input-group-prepend">
-                  <Button type="submit" className="border border-secondary rounded" variant="secondary">Выбрать</Button>
+                  <Button type="submit" className="border border-secondary rounded" variant="secondary" >
+                    Выбрать
+                  </Button>
                 </div>
               </div>
             </Form>
