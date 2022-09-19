@@ -1,6 +1,6 @@
 import React from 'react';
 import { Nav, Navbar, Form, NavDropdown, Button, InputGroup } from 'react-bootstrap';
-import Tables from '../Tables/Tables';
+import {Index} from '../Tables/index';
 import { useForm } from "react-hook-form";
 // import { Routes, Route } from 'react-router-dom;'
 import { getApiOzWb } from '../../pages/main/API/endPointApi';
@@ -11,6 +11,7 @@ const Brief = () => {
   const formHendler = (e) => {
     e.preventDefault()
     if (inputs.dateFrom && inputs.dateTo) {
+      console.log("res", inputs)
       getApiOzWb(e, inputs)
     }
     setInputs((prev) => ({
@@ -32,12 +33,12 @@ const Brief = () => {
             <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" data-time="lastMonth" onClick={getApiOzWb}>Прошлый месяц</Button>
             <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" data-time="90Days" onClick={getApiOzWb}>90 дней</Button>
 
-            <Form onSubmit={formHendler} data-time="form" name="form" className="border border-secondary rounded me-auto">
+            <Form onSubmit={formHendler} data-time="form" name="form" className="border border-secondary rounded">
               <div className="input-group col-xs-3">
                 <input type="date" className="form-control" name="dateFrom" value={inputs.from} onChange={formHendler} style={{ border: "none" }} />
                 <input type="date" className="form-control" name="dateTo" value={inputs.to} onChange={formHendler} style={{ border: "none" }} />
                 <div className="input-group-prepend">
-                  <Button type="submit" className="border border-secondary rounded" variant="secondary" >
+                  <Button type="submit" className="border border-secondary rounded" variant="secondary" size="lg">
                     Выбрать
                   </Button>
                 </div>
@@ -75,7 +76,7 @@ const Brief = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Tables />
+      <Index />
     </>
   )
 }

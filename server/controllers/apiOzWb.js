@@ -1,4 +1,5 @@
 const axios = require('axios').default;
+require('dotenv').config();
 
 const testObj = {
     "result": {
@@ -388,7 +389,7 @@ exports.apiLogOz = (req, res) => {
 exports.apiSalesRefWb = async (req, res) => {
     try {
         console.log("Wb1------>",req.body)
-         const wb = await axios.get(`https://suppliers-stats.wildberries.ru/api/v1/supplier/sales?dateFrom=${req.body.date_from}&key=YTUzN2QxNmQtNjM4Ny00YzI0LWExNGYtODNjNGE1NGRmNjQ2`, {withCredentials: false });
+         const wb = await axios.get(`https://suppliers-stats.wildberries.ru/api/v1/supplier/sales?dateFrom=${req.body.date_from}&key=${process.env.KEY_API_WB}`, {withCredentials: false });
         console.log('WB------>',wb.data)
          res.json({data: wb.data}) 
     } catch (error) {
@@ -398,7 +399,7 @@ exports.apiSalesRefWb = async (req, res) => {
 exports.apiOrderWb = async (req, res) => {
     try {
         console.log("Wb2------>",req.body)
-        const wb = await axios.get(`https://suppliers-stats.wildberries.ru/api/v1/supplier/orders?dateFrom=${req.body.date_from}&key=YTUzN2QxNmQtNjM4Ny00YzI0LWExNGYtODNjNGE1NGRmNjQ2`, {withCredentials: false });
+        const wb = await axios.get(`https://suppliers-stats.wildberries.ru/api/v1/supplier/orders?dateFrom=${req.body.date_from}&key=${process.env.KEY_API_WB}`, {withCredentials: false });
         res.json({data: wb.data})
     } catch (error) {
         console.log("this is error2---->",error.message)
