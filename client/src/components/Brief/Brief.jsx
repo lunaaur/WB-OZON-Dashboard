@@ -25,8 +25,6 @@ const Brief = () => {
     const dataTerm = e.target.getAttribute("data-time")
     const dataId = inputs
     const ax = getDataTimeTerm(dataTerm, inputs )
-    console.log('e----->', e)
-    console.log('inputs----->', inputs)
   
   const sale = async () => {
     setLoadSal(true)
