@@ -1,5 +1,13 @@
 const actionTypes = {
-    // указываем списком все actions
+    SET_LOAD_SAL: "SET_LOAD_SAL",
+    SET_LOAD_ORD: "SET_LOAD_ORD",
+    SET_LOAD_REF: "SET_LOAD_REF",
+    SET_LOAD_LOG: "SET_LOAD_LOG",
+
+    SET_UNLOAD_SAL: "SET_UNLOAD_SAL",
+    SET_UNLOAD_ORD: "SET_UNLOAD_ORD",
+    SET_UNLOAD_REF: "SET_UNLOAD_REF",
+    SET_UNLOAD_LOG: "SET_UNLOAD_LOG",
 }
 
 export default actionTypes;

@@ -3,7 +3,6 @@ import local from 'dayjs/locale/ru'
 
 function getDataTimeTerm(period, inputs) {
     const nowDay = dayjs()
-
     switch (period) {
         case 'yesterday':
             const temp = dayjs().subtract(1, 'day')
