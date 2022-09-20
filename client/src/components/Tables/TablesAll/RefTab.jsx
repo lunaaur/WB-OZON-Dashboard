@@ -4,7 +4,7 @@ import LineChart from '../../Chart/LineChart';
 import { DataWbRef } from '../../Chart/DataWE';
 import { DataOzonRef } from '../../Chart/DataOz';
 
-const RefTab = () => {
+export const RefTab = () => {
     const [userData, setUserData] = useState({
         labels: DataWbRef.map((data) => data.year1),
         datasets: [
@@ -90,5 +90,4 @@ const RefTab = () => {
   )
 };
 
-export default RefTab
 

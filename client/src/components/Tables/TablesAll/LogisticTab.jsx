@@ -4,7 +4,7 @@ import LineChart from '../../Chart/LineChart';
 import { DataWbLog } from '../../Chart/DataWE';
 import { DataOzonLog } from '../../Chart/DataOz';
 
-const LogisticTab = () => {
+export const LogisticTab = () => {
     const [userData, setUserData] = useState({
         labels: DataWbLog.map((data) => data.year1),
         datasets: [
@@ -90,5 +90,5 @@ const LogisticTab = () => {
   )
 };
 
-export default LogisticTab
+
 

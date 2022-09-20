@@ -4,7 +4,7 @@ import LineChart from '../../Chart/LineChart';
 import { DataWbOrd } from '../../Chart/DataWE';
 import { DataOzonOrd } from '../../Chart/DataOz';
 
-const OrderTab = () => {
+export const OrderTab = () => {
     const [userData, setUserData] = useState({
         labels: DataWbOrd.map((data) => data.year1),
         datasets: [
@@ -96,5 +96,4 @@ const OrderTab = () => {
   )
 };
 
-export default OrderTab
 

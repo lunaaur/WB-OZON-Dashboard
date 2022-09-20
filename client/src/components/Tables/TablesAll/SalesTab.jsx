@@ -4,7 +4,7 @@ import LineChart from '../../Chart/LineChart';
 import { DataWbSal } from '../../Chart/DataWE';
 import { DataOzonSal } from '../../Chart/DataOz';
 
- const SalesTab = () => {
+export const SalesTab = () => {
     const [userData, setUserData] = useState({
         labels: DataWbSal.map((data) => data.year1),
         datasets: [
@@ -91,4 +91,3 @@ import { DataOzonSal } from '../../Chart/DataOz';
   )
 };
 
-export default SalesTab
