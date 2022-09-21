@@ -364,6 +364,7 @@ const testObj = {
     "timestamp": "2022-09-15 12:45:43"
   }
 
+
 exports.apiSalesOz = (req, res) => {
     // const ozon = await axios.post('', req.body);
     // console.log("Oz1------>",req.body)
@@ -385,6 +386,16 @@ exports.apiLogOz = (req, res) => {
     res.json(testObj)
 }
 
+exports.BigDataWb = async (req, res) => {
+  try {
+    console.log("WbBG------>", req.body)
+    const wb = await axios.get(`https://suppliers-stats.wildberries.ru/api/v1/supplier/reportDetailByPeriod?key=${process.env.KEY_API_WB}&dateFrom=${req.body.date_from}&dateTo=${req.body.date_to}`, { withCredentials: false });
+    console.log('WG------>', wb.data)
+    res.json({ data: wb.data })
+  } catch (error) {
+console.log("Ошибка WB", error.message)
+  }
+ }
 
 exports.apiSalesRefWb = async (req, res) => {
     try {
