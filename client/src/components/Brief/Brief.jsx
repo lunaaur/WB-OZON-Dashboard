@@ -11,10 +11,14 @@ import { getDataTimeTerm } from '../../pages/main/helpers/getDate';
 import { useDispatch, useSelector } from 'react-redux';
 import { bigDataWb } from '../../store/action'
 import { useEffect } from 'react';
+import {Watch} from 'react-loader-spinner'
 
 
 
 const Brief = () => {
+
+const [isAllLoad, setAllLoad] = useState(false)
+
   const [isLoadSal, setLoadSal] = useState(false);
   const [isLoadOrd, setLoadOrd] = useState(false)
   const [isLoadRef, setLoadRef] = useState(false)
@@ -24,16 +28,16 @@ const Brief = () => {
   const dispatch = useDispatch()
 
   async function getBgWB() {
-    console.log("27")
+    setAllLoad(true)
     const dateFromTo = getDataTimeTerm('lastWeek')
     let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
     console.log("test", resBigDwb.data);
     dispatch(bigDataWb(resBigDwb.data))
-    console.log("32")
+    setAllLoad(false)
   }
-  // useEffect(()=> {
-  //   getBgWB()
-  // }, [])
+  useEffect(()=> {
+    getBgWB()
+  }, [])
 
   const getApiOzWb = async (e, inputs) => {
 
@@ -171,11 +175,17 @@ const Brief = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      <Index
+      {/* {
+        (isAllLoad)? 
+        <Watch/>
+        : */}
+        <Index
         isLoadSal={isLoadSal}
         isLoadOrd={isLoadOrd}
         isLoadRef={isLoadRef}
         isLoadLog={isLoadLog} />
+       {/* } */}
+      
     </>
   )
 }
