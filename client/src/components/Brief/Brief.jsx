@@ -9,6 +9,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { getDataTimeTerm } from '../../pages/main/helpers/getDate';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 
 
@@ -21,12 +22,15 @@ const Brief = () => {
   const [inputs, setInputs] = useState({ dateFrom: "", dateTo: "" })
   const dispatch = useDispatch()
   async function getBgWB() {
-    const dateFromTo = getDataTimeTerm('90Days')
-    let resBigDwb await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
-    console.log(resBigDwb.data);
+    const dateFromTo = getDataTimeTerm('lastWeek')
+    let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
+    console.log("test", resBigDwb.data);
     dispatch(bigDataWb(resBigDwb.data))
   }
+  useEffect(()=> {
+    getBgWB()
 
+  }, [])
   const getApiOzWb = async (e, inputs) => {
 
     const dataTerm = e.target.getAttribute("data-time")

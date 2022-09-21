@@ -388,13 +388,13 @@ exports.apiLogOz = (req, res) => {
 
 exports.BigDataWb = async (req, res) => {
   try {
-    console.log("Wb90Days------>",req.body)
-     const wb = await axios.get(`https://suppliers-stats.wildberries.ru/api/v1/supplier/sales?dateFrom=${req.body.date_from}&key=${process.env.KEY_API_WB}`, {withCredentials: false });
-    console.log('WB90Days------>',wb.data)
-     res.json({data: wb.data}) 
-} catch (error) {
-    console.log("this is error in BigData90day---->",error.message)
-}
+    console.log("WbBG------>", req.body)
+    const wb = await axios.get(`https://suppliers-stats.wildberries.ru/api/v1/supplier/reportDetailByPeriod?key=${process.env.KEY_API_WB}&dateFrom=${req.body.date_from}&dateTo=${req.body.date_to}`, { withCredentials: false });
+    console.log('WG------>', wb.data)
+    res.json({ data: wb.data })
+  } catch (error) {
+console.log("Ошибка WB", error.message)
+  }
  }
 
 exports.apiSalesRefWb = async (req, res) => {
