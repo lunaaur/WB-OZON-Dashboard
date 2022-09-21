@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { Nav, Navbar, Form, NavDropdown, Button, InputGroup } from 'react-bootstrap';
 import { Index } from '../Tables/index';
 import { useForm } from "react-hook-form";
 // import { Routes, Route } from 'react-router-dom;'
 // import { getApiOzWb } from '../../pages/main/API/endPointApi';
 // import { getApiOzWb } from '../Tables/index';
-import { useState } from 'react';
 import axios from 'axios';
 import { getDataTimeTerm } from '../../pages/main/helpers/getDate';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,18 +21,25 @@ const Brief = () => {
 
   const [inputs, setInputs] = useState({ dateFrom: "", dateTo: "" })
   const dispatch = useDispatch()
+  const bigDataWB = useSelector((store) => store.bigDataWB)
 
   async function getBgWB() {
     console.log("27")
+    console.log('bigDataWB: ',bigDataWB.length, bigDataWB);
+
     const dateFromTo = getDataTimeTerm('lastWeek')
-    let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
-    console.log("test", resBigDwb.data);
-    dispatch(bigDataWb(resBigDwb.data))
+
+    if (!bigDataWB.length) {
+      console.log("true")
+      let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
+      console.log("test=>>>", resBigDwb.data.data);
+      dispatch(bigDataWb(resBigDwb.data.data))
+    }
     console.log("32")
   }
-  // useEffect(()=> {
-  //   getBgWB()
-  // }, [])
+  useEffect(() => {
+    getBgWB()
+  }, [])
 
   const getApiOzWb = async (e, inputs) => {
 
