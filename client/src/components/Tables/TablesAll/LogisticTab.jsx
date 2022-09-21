@@ -38,6 +38,7 @@ export const LogisticTab = () => {
 
   // console.log('trendLine------>',lineTrend(arrOne, "totalPrice"))
 const WB = lineTrend(salesArray, "delivery_rub")
+const OZ = lineTrend(DataOzonLog, "userGain")
 
 
     const [userData, setUserData] = useState({
@@ -85,8 +86,8 @@ const WB = lineTrend(salesArray, "delivery_rub")
           },
           line2: {
             type: 'line',
-            yMin: 1000,
-            yMax: 5000,
+            yMin: OZ.yMin,
+            yMax: OZ.yMax,
             borderColor: 'rgb(30, 144, 255)',
             borderWidth: 2,
           }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import LineChart from '../../Chart/LineChart';
 import { DataWbSal, salesArray, ordersArray} from '../../Chart/DataWE';
-import { DataOzonSal } from '../../Chart/DataOz';
+import { DataOzonSal, salesOz } from '../../Chart/DataOz';
 // import {} from '../../Chart/DataWE'
 // import {} from 'first'
 import s from "./table.module.css";
@@ -104,6 +104,7 @@ export const SalesTab = () => {
 
   // console.log('trendLine------>',lineTrend(arrOne, "totalPrice"))
 const WB = lineTrend(salesArray, "retail_amount")
+const OZ = lineTrend(salesOz, "totalPrice")
 
     const [userData, setUserData] = useState({
         labels: salesArray.map((data) => data.date),
@@ -122,7 +123,7 @@ const WB = lineTrend(salesArray, "retail_amount")
             borderWidth: 2,
           },{
             label: "Data OZ",
-            data: DataOzonSal.map((data) => data.userGain),
+            data: salesOz.map((data) => data.totalPrice),
             backgroundColor: [
               "red"
             ],
@@ -150,8 +151,8 @@ const WB = lineTrend(salesArray, "retail_amount")
           },
           line2: {
             type: 'line',
-            yMin: 1000,
-            yMax: 5000,
+            yMin: OZ.yMin,
+            yMax: OZ.yMax,
             borderColor: 'rgb(30, 144, 255)',
             borderWidth: 2,
           }
@@ -178,7 +179,10 @@ const WB = lineTrend(salesArray, "retail_amount")
         </tr>
         <tr>
           <td>OZ</td>
-          <td>↑ 400050 P</td>
+          <td>{salesOz.reduce((acc, val)=> {
+            return acc + val.totalPrice
+
+          }, 0)}</td>
         </tr>
         
       </tbody>
