@@ -388,9 +388,7 @@ exports.apiLogOz = (req, res) => {
 
 exports.BigDataWb = async (req, res) => {
   try {
-    console.log("WbBG------>", req.body)
     const wb = await axios.get(`https://suppliers-stats.wildberries.ru/api/v1/supplier/reportDetailByPeriod?key=${process.env.KEY_API_WB}&dateFrom=${req.body.date_from}&dateTo=${req.body.date_to}`, { withCredentials: false });
-    console.log('WG------>', wb.data)
     res.json({ data: wb.data })
   } catch (error) {
 console.log("Ошибка WB", error.message)

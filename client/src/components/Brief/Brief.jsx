@@ -146,13 +146,6 @@ const Brief = () => {
                 </div>
               </div>
             </Form>
-            {/* <Form >
-            <InputGroup  className="border border-secondary rounded" style={{ maxWidth: "100%" }}>
-              <Form.Control type="date"  />
-              <Form.Control type="date" onChange={formHendler}/>
-              <Button type="submit" variant="secondary">Выбрать</Button>
-            </InputGroup>
-            </Form> */}
             <NavDropdown title="Опции" id="basic-nav-dropdown" className="border border-secondary rounded">
               <NavDropdown.Item href="#action">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action">

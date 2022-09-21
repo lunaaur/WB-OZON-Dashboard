@@ -51,7 +51,7 @@ export const OrderTab = () => {
           const xSquere = x ** 2 // шаг 6
           summaXSquere = summaXSquere + xSquere // шаг 7
       
-          console.log(index, summaX);
+          // console.log(index, summaX);
         })
         let SquereSummaX = summaX ** 2 // шаг 8
         let topA = n * summaXY - summaX * summaY // шаг 9
@@ -63,6 +63,7 @@ export const OrderTab = () => {
       }
 
   const WB = lineTrend(ordersArray, "quantity")
+  console.log("WB----->", WB)
 
   return (
     <>
