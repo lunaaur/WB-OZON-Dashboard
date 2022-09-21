@@ -8,6 +8,8 @@ const actionTypes = {
     SET_UNLOAD_ORD: "SET_UNLOAD_ORD",
     SET_UNLOAD_REF: "SET_UNLOAD_REF",
     SET_UNLOAD_LOG: "SET_UNLOAD_LOG",
+
+    BIG_DATA_WB: "BIG_DATA_WB",
 }
 
 export default actionTypes;

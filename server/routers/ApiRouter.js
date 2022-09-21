@@ -8,7 +8,8 @@ const {apiSalesOz,
     apiSalesRefWb,
     apiOrderWb,
     apiRefWb,
-    apiLogWb, } = require('../controllers/apiOzWb.js');
+    apiLogWb,
+    BigDataWb } = require('../controllers/apiOzWb.js');
 
 router.post('/ozsal', apiSalesOz);
 router.post('/ozord', apiOrderOz);
@@ -19,6 +20,7 @@ router.post('/wbsal', apiSalesRefWb);
 router.post('/wbord', apiOrderWb);
 router.post('/wbref', apiRefWb);
 router.post('/wblog', apiLogWb);
+router.post('/bgwb', BigDataWb)
 
 
 module.exports = router;
