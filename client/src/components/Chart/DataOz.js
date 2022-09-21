@@ -28,27 +28,27 @@ export const DataOzonSal = [
 export const DataOzonOrd = [
         {
             year: 2016,
-            userGain: 1500
+            userGain: 15
         },
         {
             year: 2017,
-            userGain: 2300
+            userGain: 23
         },
         {
             year: 2018,
-            userGain: 2600
+            userGain: 26
         },
         {
             year: 2019,
-            userGain: 3000
+            userGain: 30
         },
         {
             year: 2020,
-            userGain: 4000
+            userGain: 40
         },
         {
             year: 2021,
-            userGain: 5700
+            userGain: 57
         },
         ];
 
@@ -82,26 +82,26 @@ export const DataOzonOrd = [
             export const DataOzonLog = [
                 {
                     year: 2016,
-                    userGain: 10000
+                    userGain: 100
                 },
                 {
                     year: 2017,
-                    userGain: 20000
+                    userGain: 200
                 },
                 {
                     year: 2018,
-                    userGain: 30000
+                    userGain: 300
                 },
                 {
                     year: 2019,
-                    userGain: 35000
+                    userGain: 3500
                 },
                 {
                     year: 2020,
-                    userGain: 28000
+                    userGain: 280
                 },
                 {
                     year: 2021,
-                    userGain: 31000
+                    userGain: 310
                 },
                 ]
