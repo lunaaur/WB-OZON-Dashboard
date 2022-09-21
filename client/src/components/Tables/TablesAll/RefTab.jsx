@@ -3,6 +3,7 @@ import Table from 'react-bootstrap/Table';
 import LineChart from '../../Chart/LineChart';
 import { DataWbRef } from '../../Chart/DataWE';
 import { DataOzonRef } from '../../Chart/DataOz';
+import s from "./table.module.css";
 
 export const RefTab = () => {
     const [userData, setUserData] = useState({
@@ -60,7 +61,7 @@ export const RefTab = () => {
     }
   }}/>
             </div>
-              <Table striped bordered hover style={{maxWidth:'40%'}}>
+              <Table striped bordered hover className={s.table} style={{maxWidth:'80%'}}>
              <thead>
             <tr>
                 <th></th>
