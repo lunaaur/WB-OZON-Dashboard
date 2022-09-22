@@ -12,6 +12,11 @@ const [Wbline, setWbLine] = useState ({
   yMin: 1000,
   yMax: 10
 })
+
+const [sumSales, setSumSelaes] = useState (0) 
+
+
+
   const tableData = useSelector(state => state.bigDataWB);
   console.log("даннные из строра", tableData)
 
@@ -26,6 +31,10 @@ const [Wbline, setWbLine] = useState ({
       console.log('line: ', line);
 
       setWbLine(line)
+      setSumSelaes(nfa.reduce((acc, val) => {
+        return acc + val.retail_amount
+    
+      }, 0))
       setUserData({
         labels: nfa.map((data) => data.date),
         datasets: [
@@ -227,7 +236,7 @@ const [Wbline, setWbLine] = useState ({
         }} />
       </div>
 
-      <Table striped bordered hover className={s.table} style={{ maxWidth: '80%' }}>
+      <Table sumSales={sumSales} striped bordered hover className={s.table} style={{ maxWidth: '80%' }}>
         <thead>
           <tr>
             <th></th>
@@ -237,10 +246,11 @@ const [Wbline, setWbLine] = useState ({
         <tbody>
           <tr>
             <td>WB</td>
-            <td>{salesArray.reduce((acc, val) => {
-              return acc + val.retail_amount
+            <td>
 
-            }, 0)}</td>
+          {sumSales}
+              
+            </td>
           </tr>
           <tr>
             <td>OZ</td>

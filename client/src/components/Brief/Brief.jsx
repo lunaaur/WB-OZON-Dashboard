@@ -174,16 +174,16 @@ const [isAllLoad, setAllLoad] = useState(false)
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      {/* {
+      {
         (isAllLoad)? 
         <Watch/>
-        : */}
+        :
         <Index
         isLoadSal={isLoadSal}
         isLoadOrd={isLoadOrd}
         isLoadRef={isLoadRef}
         isLoadLog={isLoadLog} />
-       {/* } */}
+       }
       
     </>
   )
