@@ -15,7 +15,7 @@ export const SalesTab = () => {
   // const [data, setData] = useState(false);
 let filterSale 
 useEffect (()=>{
-  if(!tableData.length){
+  if(tableData?.data?.length){
     let work = "work"
     filterSale = mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
     console.log('filterSale : ', filterSale );
