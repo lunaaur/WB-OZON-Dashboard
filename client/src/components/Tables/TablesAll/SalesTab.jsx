@@ -13,20 +13,19 @@ export const SalesTab = () => {
   console.log("даннные из строра", tableData)
 
   // const [data, setData] = useState(false);
-
-  let filter = useEffect(()=>{
+let filterSale 
     if(tableData.length > 0){
-     const filterSale = mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
-     return filterSale
-  } 
-}, [tableData])
+      filterSale = mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
+    } 
+
+ 
 
 // const filter = async() => {
 //   const filterSale = await mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
 //      return filterSale
 // }
 
-console.log('filter Sale ------->', filter)
+
   
   // if(tableData.length > 0){
   //   const filterSale = mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
