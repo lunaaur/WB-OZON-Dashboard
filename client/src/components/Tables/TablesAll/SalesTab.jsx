@@ -14,19 +14,14 @@ export const SalesTab = () => {
 
   // const [data, setData] = useState(false);
 
-//   let filter = useEffect(()=>{
-//     if(tableData.length > 0){
-//      const filterSale = mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
-//      return filterSale
-//   } 
-// }, [tableData])
-
-const filter = async() => {
-  const filterSale = await mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
+  let filter = useEffect(()=>{
+    if(tableData.length > 0){
+     const filterSale = mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
      return filterSale
-}
+  } 
+}, [tableData])
 
-console.log('filter Sale ------->', filter())
+console.log('filter Sale ------->', filter)
   
   // if(tableData.length > 0){
   //   const filterSale = mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
