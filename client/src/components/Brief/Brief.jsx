@@ -26,7 +26,8 @@ const Brief = () => {
   const [inputs, setInputs] = useState({ dateFrom: "", dateTo: "" })
   const dispatch = useDispatch()
   const bigDataWB = useSelector((store) => store.bigDataWB)
-  //const revenue90Doz = useSelector((store) => store.revenue90Doz)
+  const revenue90Doz = useSelector((store) => store.revenue_OZ)
+  console.log('revenue90Doz: ', revenue90Doz);
 
   async function getBgWB() {
     console.log("27")
@@ -34,6 +35,7 @@ const Brief = () => {
 
     const dateFromTo = getDataTimeTerm('lastWeek')
     dispatch(ReadDate(dateFromTo))
+    if (!bigDataWB.length) {
     let resDays90Oz = await axios.post(
       "https://api-seller.ozon.ru/v1/analytics/data",
       {
@@ -55,6 +57,7 @@ const Brief = () => {
     );
     console.log("88", resDays90Oz.data.result.data);
     dispatch(revenue90Doz(resDays90Oz.data.result.data))
+    }
 
     if (!bigDataWB.length) {
       console.log("true")
