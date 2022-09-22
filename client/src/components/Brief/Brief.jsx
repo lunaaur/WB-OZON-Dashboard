@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { getDataTimeTerm } from '../../pages/main/helpers/getDate';
 import { useDispatch, useSelector } from 'react-redux';
-import { bigDataWb, revenue90Doz, returns90Doz, ReadDate } from '../../store/action'
+import { bigDataWb, revenue90Doz, returns90Doz, orderedUnits90Doz, ReadDate } from '../../store/action'
 import { useEffect } from 'react';
 import { Watch } from 'react-loader-spinner'
 
@@ -28,12 +28,13 @@ const Brief = () => {
   const bigWB = useSelector((store) => store.bigDataWB)
   const revenueOZ = useSelector((store) => store.revenue_OZ)
   const returnOZ = useSelector((store) => store.returns_OZ)
- 
+
 
   async function getBgWB() {
     console.log("27")
 
     const dateFromTo = getDataTimeTerm('lastWeek')
+    //const dateFromTo = getDataTimeTerm('90Days')
     dispatch(ReadDate(dateFromTo))
     //if (!revenue90Doz.length) {
     let resDays90Oz = await axios.post(
@@ -55,7 +56,7 @@ const Brief = () => {
         },
       }
     );
-    
+
     dispatch(revenue90Doz(resDays90Oz.data.result.data))
     // }
 
@@ -79,9 +80,29 @@ const Brief = () => {
         },
       }
     );
-    console.log("88", resreturnsDays90Oz.data.result.data);
     dispatch(returns90Doz(resreturnsDays90Oz.data.result.data))
     // }
+    let resOrderedUnitsDays90Oz = await axios.post(
+      "https://api-seller.ozon.ru/v1/analytics/data",
+      {
+        date_from: dateFromTo.date_from,
+        date_to: dateFromTo.date_to,
+        metrics: ["returns"],
+        dimension: ["day"],
+        filters: [],
+        limit: 1000,
+        offset: 0,
+      },
+      {
+        headers: {
+          "Client-Id": "108699",
+          "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log("105", resOrderedUnitsDays90Oz.data.result.data);
+    dispatch(orderedUnits90Doz(resOrderedUnitsDays90Oz.data.result.data))
 
     if (!bigWB.length) {
       console.log("true")

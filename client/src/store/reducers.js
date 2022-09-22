@@ -5,6 +5,7 @@ const initState = {
     bigDataWB: [],
     revenue_OZ: [],
     returns_OZ: [],
+    ordered_OZ: [],
     datePeriod: {},
 }
 
@@ -30,6 +31,10 @@ export const reducers = (state = initState, action) => {
                     return {
                         ...state, returns_OZ: action.payload
                     }
+                    case actionTypes.ORDERED_UNIT_OZ:
+                        return {
+                            ...state, ordered_OZ: action.payload
+                        }
         default:
             return state;
     }
