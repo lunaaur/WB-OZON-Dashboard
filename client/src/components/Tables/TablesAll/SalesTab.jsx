@@ -1,13 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import LineChart from '../../Chart/LineChart';
 import { DataWbSal, salesArray, ordersArray} from '../../Chart/DataWE';
 import { DataOzonSal, salesOz } from '../../Chart/DataOz';
-// import {} from '../../Chart/DataWE'
-// import {} from 'first'
+import {useSelector} from 'react-redux';
+import mainFunction from "./func"
 import s from "./table.module.css";
 
 export const SalesTab = () => {
+
+  const tableData = useSelector(state => state.bigDataWB);
+  console.log("даннные из строра", tableData)
+
+  // const [data, setData] = useState(false);
+
+//   let filter = useEffect(()=>{
+//     if(tableData.length > 0){
+//      const filterSale = mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
+//      return filterSale
+//   } 
+// }, [tableData])
+
+const filter = async() => {
+  const filterSale = await mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
+     return filterSale
+}
+
+console.log('filter Sale ------->', filter())
+  
+  // if(tableData.length > 0){
+  //   const filterSale = mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
+  //   console.log('filter Sale ------->', filterSale)
+  //   console.log('length store----->', tableData.length)
+  // }
 
   // let arrOne = [
   //   {
@@ -91,7 +116,6 @@ export const SalesTab = () => {
       const xSquere = x ** 2 // шаг 6
       summaXSquere = summaXSquere + xSquere // шаг 7
   
-      console.log(index, summaX);
     })
     let SquereSummaX = summaX ** 2 // шаг 8
     let topA = n * summaXY - summaX * summaY // шаг 9
