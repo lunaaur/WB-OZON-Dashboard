@@ -1,95 +1,88 @@
 import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import LineChart from '../../Chart/LineChart';
-import { DataWbSal, salesArray, ordersArray} from '../../Chart/DataWE';
+import { DataWbSal, salesArray, ordersArray } from '../../Chart/DataWE';
 import { DataOzonSal, salesOz } from '../../Chart/DataOz';
-import {useSelector} from 'react-redux';
-import {mainFunction} from "./func"
+import { useSelector } from 'react-redux';
+import { mainFunction } from "./func"
 import s from "./table.module.css";
 
 export const SalesTab = () => {
-
+const [Wbline, setWbLine] = useState ({
+  yMin: 1000,
+  yMax: 10
+})
   const tableData = useSelector(state => state.bigDataWB);
   console.log("даннные из строра", tableData)
 
   // const [data, setData] = useState(false);
-let newFilterArr 
-useEffect (()=>{
-  if(tableData?.data?.length){
+  let newFilterArr
+  useEffect(() => {
+    if (tableData?.data?.length) {
 
-    
-    let work = "work"
-    newFilterArr = mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
-    const nfa = newFilterArr.flat()
-    WB = lineTrend(nfa, "retail_amount")
+      newFilterArr = mainFunction(tableData, { date_from: "2022-09-12", date_to: "2022-09-18" })
+      const nfa = newFilterArr.flat()
+      const line = lineTrend(nfa, "retail_amount")
+      console.log('line: ', line);
+
+      setWbLine(line)
+      setUserData({
+        labels: nfa.map((data) => data.date),
+        datasets: [
+          {
+            label: "dataWB",
+            data: nfa.map((data) => data.retail_amount),
+            backgroundColor: [
+              "rgba(75,192,192,1)",
+              "#ecf0f1",
+              "#50AF95",
+              "#f3ba2f",
+              "#2a71d0",
+            ],
+            borderColor: "black",
+            borderWidth: 2,
+          }, {
+            label: "Data OZ",
+            data: salesOz.map((data) => data.totalPrice),
+            backgroundColor: [
+              "red"
+            ],
+            borderColor: "black",
+            borderWidth: 2,
+          },
+        ],
+      })
+    }
+  }, [tableData])
 
 
-console.log('newWB', WB)
 
-    console.log('nfa: ', nfa);
-    console.log('nfa[0] : ', nfa[0]);
-    
-    console.log('salesArray', salesArray);
-    console.log('salesArray[0]', salesArray[0]);
-    
-    console.log('work: ', work);
-    setUserData({
-      labels: nfa.map((data) => data.date),
-      datasets: [
-        {
-          label: "dataWB",
-          data: nfa.map((data) => data.retail_amount),
-          backgroundColor: [
-            "rgba(75,192,192,1)",
-            "#ecf0f1",
-            "#50AF95",
-            "#f3ba2f",
-            "#2a71d0",
-          ],
-          borderColor: "black",
-          borderWidth: 2,
-        },{
-          label: "Data OZ",
-          data: salesOz.map((data) => data.totalPrice),
-          backgroundColor: [
-            "red"
-          ],
-          borderColor: "black",
-          borderWidth: 2,
-        },
-      ],
-    })
-  } 
-}, [tableData])
-    
 
- 
-
-// const filter = async() => {
+  // const filter = async() => {
   //   const filterSale = await mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
   //      return filterSale
   // }
-  
-  
-  
+
+
+
   // if(tableData.length > 0){
-    //   const filterSale = mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
-    //   console.log('filter Sale ------->', filterSale)
-    //   console.log('length store----->', tableData.length)
-    // }
-    
-    // let arrOne = [
-      //   {
-        //     date: '2022-09-19T09:16:09',
-        //     lastChangeDate: '2022-09-19T09:17:29',
-        //     supplierArticle: '019-05',
-        //     techSize: '0',
-        //     barcode: '2018826348006',
-        //     totalPrice: 600,
-        //     discountPercent: 20,
-        //     isSupply: false,
-        //     isRealization: true,
-        //     promoCodeDiscount: 0,
+  //   const filterSale = mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
+  //   console.log('filter Sale ------->', filterSale)
+  //   console.log('length store----->', tableData.length)
+  // }
+
+  // let arrOne = [
+  //   {
+  //     date: '2022-09-19T09:16:09',
+  //     lastChangeDate: '2022-09-19T09:17:29',
+  //     supplierArticle: '019-05',
+  //     techSize: '0',
+  //     barcode: '2018826348006',
+  //     totalPrice: 600,
+  //     discountPercent: 20,
+  //     isSupply: false,
+  //     isRealization: true,
+  //     promoCodeDiscount: 0,
   //     warehouseName: 'Электросталь',
   //     countryName: 'Россия',
   //     oblastOkrugName: 'Дальневосточный федеральный округ',
@@ -111,29 +104,29 @@ console.log('newWB', WB)
   //     srid: '86b8ee4cf2ea49d390cf13da5176f670'
   //   },
   //   {
-    //     date: '2022-09-19T10:12:27',
-    //     lastChangeDate: '2022-09-19T10:12:59',
-    //     supplierArticle: 'ББ1бб1',
-    //     techSize: '0',
-    //     barcode: '2033914218627',
-    //     totalPrice: 5500,
-    //     discountPercent: 35,
-    //     isSupply: false,
-    //     isRealization: true,
-    //     promoCodeDiscount: 0,
-    //     warehouseName: 'Санкт-Петербург',
-    //     countryName: 'Россия',
-    //     oblastOkrugName: 'Центральный федеральный округ',
-    //     regionName: 'Московская',
-    //     incomeID: 7666129,
-    //     saleID: 'S3398410574',
-    //     odid: 600512834239,
-    //     spp: 0,
-    //     forPay: 3146,
-    //     finishedPrice: 3147,
-    //     priceWithDisc: 3575,
-    //     nmId: 86264589,
-    //     subject: 'Полотенца банные',
+  //     date: '2022-09-19T10:12:27',
+  //     lastChangeDate: '2022-09-19T10:12:59',
+  //     supplierArticle: 'ББ1бб1',
+  //     techSize: '0',
+  //     barcode: '2033914218627',
+  //     totalPrice: 5500,
+  //     discountPercent: 35,
+  //     isSupply: false,
+  //     isRealization: true,
+  //     promoCodeDiscount: 0,
+  //     warehouseName: 'Санкт-Петербург',
+  //     countryName: 'Россия',
+  //     oblastOkrugName: 'Центральный федеральный округ',
+  //     regionName: 'Московская',
+  //     incomeID: 7666129,
+  //     saleID: 'S3398410574',
+  //     odid: 600512834239,
+  //     spp: 0,
+  //     forPay: 3146,
+  //     finishedPrice: 3147,
+  //     priceWithDisc: 3575,
+  //     nmId: 86264589,
+  //     subject: 'Полотенца банные',
   //     category: 'Дом',
   //     brand: '',
   //     IsStorno: 0,
@@ -149,7 +142,7 @@ console.log('newWB', WB)
     let summaY = 0
     let summaXY = 0
     let summaXSquere = 0
-    
+
     arr.map((el, index) => {
       let x = index
       let y = el[poleSort]
@@ -159,7 +152,7 @@ console.log('newWB', WB)
       summaXY = summaXY + XY // шаг 3
       const xSquere = x ** 2 // шаг 6
       summaXSquere = summaXSquere + xSquere // шаг 7
-  
+
     })
     let SquereSummaX = summaX ** 2 // шаг 8
     let topA = n * summaXY - summaX * summaY // шаг 9
@@ -167,103 +160,99 @@ console.log('newWB', WB)
     let resultA = topA / downA
     let topB = summaY - resultA * summaX
     let resultB = topB / n
-    return {yMin:resultA, yMax:resultB}
+    return { yMin: resultA, yMax: resultB }
   }
-  
-  // console.log('trendLine------>',lineTrend(arrOne, "totalPrice"))
-  
-  const OZ = lineTrend(salesOz, "totalPrice")
-  let WB = {
-    yMin: 10000,
-    yMax: 10
-}
 
-console.log('initWB', WB)
+  // console.log('trendLine------>',lineTrend(arrOne, "totalPrice"))
+
+  const OZ = lineTrend(salesOz, "totalPrice")
+
+  console.log('initWB', Wbline,)
   // const WB = lineTrend(nfa, "retail_amount")
-  
-    const [userData, setUserData] = useState({
-        labels: salesArray.map((data) => data.date),
-        datasets: [
-          {
-            label: "dataWB",
-            data: salesArray.map((data) => data.retail_amount),
-            backgroundColor: [
-              "rgba(75,192,192,1)",
-              "#ecf0f1",
-              "#50AF95",
-              "#f3ba2f",
-              "#2a71d0",
-            ],
-            borderColor: "black",
-            borderWidth: 2,
-          },{
-            label: "Data OZ",
-            data: salesOz.map((data) => data.totalPrice),
-            backgroundColor: [
-              "red"
-            ],
-            borderColor: "black",
-            borderWidth: 2,
-          },
+
+  const [userData, setUserData] = useState({
+    labels: salesArray.map((data) => data.date),
+    datasets: [
+      {
+        label: "dataWB",
+        data: salesArray.map((data) => data.retail_amount),
+        backgroundColor: [
+          "rgba(75,192,192,1)",
+          "#ecf0f1",
+          "#50AF95",
+          "#f3ba2f",
+          "#2a71d0",
         ],
+        borderColor: "black",
+        borderWidth: 2,
+      }, {
+        label: "Data OZ",
+        data: salesOz.map((data) => data.totalPrice),
+        backgroundColor: [
+          "red"
+        ],
+        borderColor: "black",
+        borderWidth: 2,
       },
-      );
-      
-      
+    ],
+  },
+  );
+
+
   return (
     <>
-    <div style={{ width: '70%' }}>
-            <LineChart chartData={userData} WB={WB} options={{
-    plugins: {
-      autocolors: false,
-      annotation: {
-        annotations: {
-          line1: {
-            type: 'line',
-            yMin: WB.yMin,
-            yMax: WB.yMax,
-            borderColor: 'rgb(255, 99, 132)',
-            borderWidth: 2,
-          },
-          line2: {
-            type: 'line',
-            yMin: OZ.yMin,
-            yMax: OZ.yMax,
-            borderColor: 'rgb(30, 144, 255)',
-            borderWidth: 2,
+      <div style={{ width: '70%' }}>
+        <LineChart chartData={userData} WB={Wbline} options={{
+          plugins: {
+            autocolors: false,
+            annotation: {
+              annotations: {
+                line1: {
+                  type: 'line',
+                  yMin: Wbline.yMin,
+                  yMax: Wbline.yMax,
+                  borderColor: 'rgb(255, 99, 132)',
+                  borderWidth: 2,
+                },
+                line2: {
+                  type: 'line',
+                  yMin: OZ.yMin,
+                  yMax: OZ.yMax,
+                  borderColor: 'rgb(30, 144, 255)',
+                  borderWidth: 2,
+                }
+              }
+            }
           }
-        }
-      }
-    }
-  }}/>
-            </div>
+        }} />
+      </div>
 
-            <Table striped bordered hover className={s.table} style={{maxWidth:'80%'}}>
-         <thead>
-        <tr>
+      <Table striped bordered hover className={s.table} style={{ maxWidth: '80%' }}>
+        <thead>
+          <tr>
             <th></th>
-          <th>Продажи</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>WB</td>
-          <td>{salesArray.reduce((acc, val)=> {
-            return acc + val.retail_amount
+            <th>Продажи</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>WB</td>
+            <td>{salesArray.reduce((acc, val) => {
+              return acc + val.retail_amount
 
-          }, 0)}</td>
-        </tr>
-        <tr>
-          <td>OZ</td>
-          <td>{salesOz.reduce((acc, val)=> {
-            return acc + val.totalPrice
+            }, 0)}</td>
+          </tr>
+          <tr>
+            <td>OZ</td>
+            <td>{salesOz.reduce((acc, val) => {
+              return acc + val.totalPrice
 
-          }, 0)}</td>
-        </tr>
-        
-      </tbody>
-            </Table>
-            </>
+            }, 0)}</td>
+          </tr>
+
+        </tbody>
+      </Table>
+    </>
   )
 };
 
