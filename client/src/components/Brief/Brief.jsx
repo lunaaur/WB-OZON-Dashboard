@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { getDataTimeTerm } from '../../pages/main/helpers/getDate';
 import { useDispatch, useSelector } from 'react-redux';
-import { bigDataWb, revenue90Doz } from '../../store/action'
+import { bigDataWb, revenue90Doz, ReadDate } from '../../store/action'
 import { useEffect } from 'react';
 import { Watch } from 'react-loader-spinner'
 
@@ -32,7 +32,7 @@ const Brief = () => {
     console.log('bigDataWB: ', bigDataWB.length, bigDataWB);
 
     const dateFromTo = getDataTimeTerm('lastWeek')
-    //dispatch(ReadDate(dateFromTo))
+    dispatch(ReadDate(dateFromTo))
     // let resDays90Oz = await axios.post(
     //   "https://api-seller.ozon.ru/v1/analytics/data",
     //   {

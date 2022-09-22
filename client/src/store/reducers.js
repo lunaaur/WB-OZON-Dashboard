@@ -4,6 +4,7 @@ import actionTypes from './types';
 const initState = {
     bigDataWB: [],
     revenue_OZ: [],
+    datePeriod: {},
 }
 
 // укажем state по default
@@ -19,6 +20,10 @@ export const reducers = (state = initState, action) => {
             return {
                 ...state, revenue_OZ: action.payload
             }
+            case actionTypes.DATE_PERIOD:
+                return {
+                    ...state, datePeriod: action.payload
+                }
         default:
             return state;
     }
