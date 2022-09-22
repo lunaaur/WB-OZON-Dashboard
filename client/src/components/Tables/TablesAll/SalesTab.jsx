@@ -4,7 +4,7 @@ import LineChart from '../../Chart/LineChart';
 import { DataWbSal, salesArray, ordersArray} from '../../Chart/DataWE';
 import { DataOzonSal, salesOz } from '../../Chart/DataOz';
 import {useSelector} from 'react-redux';
-import mainFunction from "./func"
+import {mainFunction} from "./func"
 import s from "./table.module.css";
 
 export const SalesTab = () => {
@@ -14,19 +14,19 @@ export const SalesTab = () => {
 
   // const [data, setData] = useState(false);
 
-//   let filter = useEffect(()=>{
-//     if(tableData.length > 0){
-//      const filterSale = mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
-//      return filterSale
-//   } 
-// }, [tableData])
-
-const filter = async() => {
-  const filterSale = await mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
+  let filter = useEffect(()=>{
+    if(tableData.length > 0){
+     const filterSale = mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
      return filterSale
-}
+  } 
+}, [tableData])
 
-console.log('filter Sale ------->', filter())
+// const filter = async() => {
+//   const filterSale = await mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
+//      return filterSale
+// }
+
+console.log('filter Sale ------->', filter)
   
   // if(tableData.length > 0){
   //   const filterSale = mainFunction(tableData, {date_from: "2022-09-12", date_to: "2022-09-18"})
