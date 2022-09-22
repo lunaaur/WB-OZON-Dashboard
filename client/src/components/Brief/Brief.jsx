@@ -32,7 +32,7 @@ const Brief = () => {
     console.log('bigDataWB: ', bigDataWB.length, bigDataWB);
 
     const dateFromTo = getDataTimeTerm('lastWeek')
-    dispatch(ReadDate(dateFromTo))
+    //dispatch(ReadDate(dateFromTo))
     // let resDays90Oz = await axios.post(
     //   "https://api-seller.ozon.ru/v1/analytics/data",
     //   {
