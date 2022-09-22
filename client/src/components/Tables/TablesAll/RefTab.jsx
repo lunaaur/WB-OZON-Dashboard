@@ -1,17 +1,47 @@
 import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import LineChart from '../../Chart/LineChart';
-import { DataWbRef } from '../../Chart/DataWE';
+import { DataWbRefб, returnsArray } from '../../Chart/DataWE';
 import { DataOzonRef } from '../../Chart/DataOz';
 import s from "./table.module.css";
 
 export const RefTab = () => {
+
+  function lineTrend(arr, poleSort) {
+    const n = arr.length // шаг 1
+    let summaX = 0
+    let summaY = 0
+    let summaXY = 0
+    let summaXSquere = 0
+  
+    arr.map((el, index) => {
+      let x = index
+      let y = el[poleSort]
+      summaX = summaX + index // шаг 4
+      summaY = summaY + y     // шаг 5
+      let XY = x * y          // шаг 2
+      summaXY = summaXY + XY // шаг 3
+      const xSquere = x ** 2 // шаг 6
+      summaXSquere = summaXSquere + xSquere // шаг 7
+    })
+    let SquereSummaX = summaX ** 2 // шаг 8
+    let topA = n * summaXY - summaX * summaY // шаг 9
+    let downA = n * summaXSquere - SquereSummaX
+    let resultA = topA / downA
+    let topB = summaY - resultA * summaX
+    let resultB = topB / n
+   return {yMin:resultA, yMax:resultB}
+  }
+
+  // console.log('trendLine------>',lineTrend(arrOne, "totalPrice"))
+const WB = lineTrend(returnsArray, "quantity")
+
     const [userData, setUserData] = useState({
-        labels: DataWbRef.map((data) => data.year1),
+        labels: returnsArray.map((data) => data.date),
         datasets: [
           {
-            label: "Users Gained",
-            data: DataWbRef.map((data) => data.userGain),
+            label: "Data WB",
+            data: returnsArray.map((data) => data.quantity),
             backgroundColor: [
               "rgba(75,192,192,1)",
               "#ecf0f1",
@@ -22,7 +52,7 @@ export const RefTab = () => {
             borderColor: "black",
             borderWidth: 2,
           },{
-            label: "Users Gained",
+            label: "Data OZ",
             data: DataOzonRef.map((data) => data.userGain),
             backgroundColor: [
               "red"
@@ -44,8 +74,8 @@ export const RefTab = () => {
         annotations: {
           line1: {
             type: 'line',
-            yMin: 4000,
-            yMax: 48670,
+            yMin: WB.yMin,
+            yMax: WB.yMax,
             borderColor: 'rgb(255, 99, 132)',
             borderWidth: 2,
           },
@@ -70,20 +100,15 @@ export const RefTab = () => {
           </thead>
           <tbody>
             <tr>
-              <td>Прибыль</td>
-              <td>↑ 20000000 P</td>
+              <td>WB</td>
+              <td>{returnsArray.reduce((acc, val)=> {
+            return acc + val.quantity
+
+          }, 0)}</td>
             </tr>
             <tr>
               <td></td>
               <td>↑ 400050 P</td>
-            </tr>
-            <tr>
-              <td>Комиссия</td>
-              <td>- 116 780р</td>
-            </tr>
-            <tr>
-              <td></td>
-              <td>- 87 000р</td>
             </tr>
           </tbody>
               </Table>

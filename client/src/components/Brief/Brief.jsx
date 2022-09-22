@@ -8,12 +8,16 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { getDataTimeTerm } from '../../pages/main/helpers/getDate';
 import { useDispatch, useSelector } from 'react-redux';
-import { bigDataWb } from '../../store/action'
+import { bigDataWb, revenue90Doz } from '../../store/action'
 import { useEffect } from 'react';
+import { Watch } from 'react-loader-spinner'
 
 
 
 const Brief = () => {
+
+  const [isAllLoad, setAllLoad] = useState(false)
+
   const [isLoadSal, setLoadSal] = useState(false);
   const [isLoadOrd, setLoadOrd] = useState(false)
   const [isLoadRef, setLoadRef] = useState(false)
@@ -25,16 +29,38 @@ const Brief = () => {
 
   async function getBgWB() {
     console.log("27")
-    console.log('bigDataWB: ',bigDataWB.length, bigDataWB);
+    console.log('bigDataWB: ', bigDataWB.length, bigDataWB);
 
     const dateFromTo = getDataTimeTerm('lastWeek')
+    dispatch(ReadDate(dateFromTo))
+    // let resDays90Oz = await axios.post(
+    //   "https://api-seller.ozon.ru/v1/analytics/data",
+    //   {
+    //     date_from: dateFromTo.date_from,
+    //     date_to: dateFromTo.date_to,
+    //     metrics: ["revenue"],
+    //     dimension: ["day"],
+    //     filters: [],
+    //     limit: 1000,
+    //     offset: 0,
+    //   },
+    //   {
+    //     headers: {
+    //       "Client-Id": "108699",
+    //       "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
+    //       "Content-Type": "application/json",
+    //     },
+    //   }
+    // );
+    // console.log("88", resDays90Oz.data.result.data);
+    // dispatch(revenue90Doz(resDays90Oz.data.result.data))
+    // if (!bigDataWB.length) {
+    //   console.log("true")
+    //   let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
+    //   console.log("test=>>>", resBigDwb.data.data);
+    //   dispatch(bigDataWb(resBigDwb.data.data))
+    // }
 
-    if (!bigDataWB.length) {
-      console.log("true")
-      let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
-      console.log("test=>>>", resBigDwb.data.data);
-      dispatch(bigDataWb(resBigDwb.data.data))
-    }
     console.log("32")
   }
   useEffect(() => {
@@ -177,11 +203,17 @@ const Brief = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+      {/* {
+        (isAllLoad)? 
+        <Watch/>
+        : */}
       <Index
         isLoadSal={isLoadSal}
         isLoadOrd={isLoadOrd}
         isLoadRef={isLoadRef}
         isLoadLog={isLoadLog} />
+      {/* } */}
+
     </>
   )
 }

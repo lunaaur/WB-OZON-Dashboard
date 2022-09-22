@@ -10,7 +10,7 @@ export const OrderTab = () => {
         labels: ordersArray.map((data) => data.date),
         datasets: [
           {
-            label: "Users Gained",
+            label: "Data WB",
             data: ordersArray.map((data) => data.quantity),
             backgroundColor: [
               "rgba(75,192,192,1)",
@@ -22,7 +22,7 @@ export const OrderTab = () => {
             borderColor: "black",
             borderWidth: 2,
           },{
-            label: "Users Gained",
+            label: "Data OZ",
             data: DataOzonOrd.map((data) => data.userGain),
             backgroundColor: [
               "red"
@@ -63,7 +63,6 @@ export const OrderTab = () => {
       }
 
   const WB = lineTrend(ordersArray, "quantity")
-  console.log("WB----->", WB)
 
   return (
     <>
@@ -98,30 +97,24 @@ export const OrderTab = () => {
         <tr>
             <th></th>
             <th>Заказы</th>
-          <th>Незавершенные</th>
+          
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>Cумма</td>
-          <td></td>
-          <td>↑ 6 000 000 P</td>
+          <td>WB</td>
+          
+          <td>{ordersArray.reduce((acc, val)=> {
+            return acc + val.quantity
+
+          }, 0)}</td>
         </tr>
         <tr>
-          <td></td>
-          <td></td>
+          <td>OZ</td>
+          
           <td>↑ 4 050 P</td>
         </tr>
-        <tr>
-          <td>Количество</td>
-          <td></td>
-          <td>800 шт</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td>+290 шт</td>
-        </tr>
+        
       </tbody>
           </Table>
           </>
