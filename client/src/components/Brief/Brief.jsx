@@ -26,6 +26,7 @@ const Brief = () => {
   const [inputs, setInputs] = useState({ dateFrom: "", dateTo: "" })
   const dispatch = useDispatch()
   const bigDataWB = useSelector((store) => store.bigDataWB)
+  //const revenue90Doz = useSelector((store) => store.revenue90Doz)
 
   async function getBgWB() {
     console.log("27")
@@ -54,7 +55,7 @@ const Brief = () => {
     );
     console.log("88", resDays90Oz.data.result.data);
     dispatch(revenue90Doz(resDays90Oz.data.result.data))
-    
+
     if (!bigDataWB.length) {
       console.log("true")
       let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
