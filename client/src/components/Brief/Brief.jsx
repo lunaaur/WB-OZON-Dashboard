@@ -28,6 +28,7 @@ const Brief = () => {
   const bigWB = useSelector((store) => store.bigDataWB)
   const revenueOZ = useSelector((store) => store.revenue_OZ)
   const returnOZ = useSelector((store) => store.returns_OZ)
+  const orderUnitsOZ = useSelector((store) => store.ordered_OZ)
 
 
   async function getBgWB() {
@@ -36,79 +37,103 @@ const Brief = () => {
     const dateFromTo = getDataTimeTerm('lastWeek')
     //const dateFromTo = getDataTimeTerm('90Days')
     dispatch(ReadDate(dateFromTo))
-    //if (!revenue90Doz.length) {
-    let resDays90Oz = await axios.post(
-      "https://api-seller.ozon.ru/v1/analytics/data",
-      {
-        date_from: dateFromTo.date_from,
-        date_to: dateFromTo.date_to,
-        metrics: ["revenue"],
-        dimension: ["day"],
-        filters: [],
-        limit: 1000,
-        offset: 0,
-      },
-      {
-        headers: {
-          "Client-Id": "108699",
-          "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    // if (!revenueOZ.length) {
+    //   try {
+    //     let resDays90Oz = await axios.post(
+    //       "https://api-seller.ozon.ru/v1/analytics/data",
+    //       {
+    //         date_from: dateFromTo.date_from,
+    //         date_to: dateFromTo.date_to,
+    //         metrics: ["revenue"],
+    //         dimension: ["day"],
+    //         filters: [],
+    //         limit: 1000,
+    //         offset: 0,
+    //       },
+    //       {
+    //         headers: {
+    //           "Client-Id": "108699",
+    //           "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
+    //           "Content-Type": "application/json",
+    //         },
+    //       }
+    //     );
+    //     console.log("61", resDays90Oz.data.result.data);
+    //     dispatch(revenue90Doz(resDays90Oz.data.result.data))
+    //   } catch (error) {
+    //     console.log("esDays90Oz", error.message, error.status)
+    //   }
 
-    dispatch(revenue90Doz(resDays90Oz.data.result.data))
     // }
 
-    // if (!revenue90Doz.length) {
-    let resreturnsDays90Oz = await axios.post(
-      "https://api-seller.ozon.ru/v1/analytics/data",
-      {
-        date_from: dateFromTo.date_from,
-        date_to: dateFromTo.date_to,
-        metrics: ["returns"],
-        dimension: ["day"],
-        filters: [],
-        limit: 1000,
-        offset: 0,
-      },
-      {
-        headers: {
-          "Client-Id": "108699",
-          "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    dispatch(returns90Doz(resreturnsDays90Oz.data.result.data))
+    // if (!returnOZ.length) {
+    //   try {
+        
+      
+    //   let resreturnsDays90Oz = await axios.post(
+    //     "https://api-seller.ozon.ru/v1/analytics/data",
+    //     {
+    //       date_from: dateFromTo.date_from,
+    //       date_to: dateFromTo.date_to,
+    //       metrics: ["returns"],
+    //       dimension: ["day"],
+    //       filters: [],
+    //       limit: 1000,
+    //       offset: 0,
+    //     },
+    //     {
+    //       headers: {
+    //         "Client-Id": "108699",
+    //         "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+    //   console.log("85", resreturnsDays90Oz.data.result.data);
+    //   dispatch(returns90Doz(resreturnsDays90Oz.data.result.data))
+    // } catch (error) {
+    //   console.log("resreturnsDays90Oz", error.message, error.status)
     // }
-    let resOrderedUnitsDays90Oz = await axios.post(
-      "https://api-seller.ozon.ru/v1/analytics/data",
-      {
-        date_from: dateFromTo.date_from,
-        date_to: dateFromTo.date_to,
-        metrics: ["returns"],
-        dimension: ["day"],
-        filters: [],
-        limit: 1000,
-        offset: 0,
-      },
-      {
-        headers: {
-          "Client-Id": "108699",
-          "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    console.log("105", resOrderedUnitsDays90Oz.data.result.data);
-    dispatch(orderedUnits90Doz(resOrderedUnitsDays90Oz.data.result.data))
+    // }
+
+    // if (orderUnitsOZ.length) {
+    //   try {
+    //   let resOrderedUnitsDays90Oz = await axios.post(
+    //     "https://api-seller.ozon.ru/v1/analytics/data",
+    //     {
+    //       date_from: dateFromTo.date_from,
+    //       date_to: dateFromTo.date_to,
+    //       metrics: ["returns"],
+    //       dimension: ["day"],
+    //       filters: [],
+    //       limit: 1000,
+    //       offset: 0,
+    //     },
+    //     {
+    //       headers: {
+    //         "Client-Id": "108699",
+    //         "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
+    //         "Content-Type": "application/json",
+    //       },
+    //     }
+    //   );
+    //   console.log("105", resOrderedUnitsDays90Oz.data.result.data);
+    //   dispatch(orderedUnits90Doz(resOrderedUnitsDays90Oz.data.result.data))
+    // } catch (error) {
+    //   console.log("resOrderedUnitsDays90Oz", error.message, error.status)
+    // }
+    // }
 
     if (!bigWB.length) {
+      try {
+        let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
+      console.log("resBigDwb=>>>", resBigDwb.status, resBigDwb );
       console.log("true")
-      let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
-      console.log("test=>>>", resBigDwb.data.data);
       dispatch(bigDataWb(resBigDwb.data.data))
+      } catch (error) {
+        console.log("error", error);  
+      }
+      
     }
 
     console.log("32")
