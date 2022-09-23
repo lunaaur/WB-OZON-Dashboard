@@ -113,7 +113,7 @@ const [isAllLoad, setAllLoad] = useState(false)
   const formHendler = (e) => {
     e.preventDefault()
 
-    if (inputs.dateFrom && inputs.dateTo) {
+    if (inputs.date_from && inputs.date_to) {
       console.log("res", inputs)
       getApiOzWb(e, inputs)
     }
@@ -140,8 +140,8 @@ const [isAllLoad, setAllLoad] = useState(false)
 
             <Form onSubmit={formHendler} data-time="form" name="form" className="border border-secondary rounded">
               <div className="input-group col-xs-3">
-                <input type="date" className="form-control" name="dateFrom" value={inputs.from} onChange={formHendler} style={{ border: "none" }} />
-                <input type="date" className="form-control" name="dateTo" value={inputs.to} onChange={formHendler} style={{ border: "none" }} />
+                <input type="date" className="form-control" name="date_from" value={inputs.from} onChange={formHendler} style={{ border: "none" }} />
+                <input type="date" className="form-control" name="date_to" value={inputs.to} onChange={formHendler} style={{ border: "none" }} />
                 <div className="input-group-prepend">
                   <Button type="submit" className="border border-secondary rounded" variant="secondary" size="lg">
                     Выбрать
