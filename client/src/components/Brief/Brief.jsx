@@ -28,137 +28,53 @@ const Brief = () => {
 
   const [inputs, setInputs] = useState({ date_from: "", date_to: "" })
   const dispatch = useDispatch()
-
   const bigWB = useSelector((store) => store.bigDataWB)
   const revenueOZ = useSelector((store) => store.revenue_OZ)
   const returnOZ = useSelector((store) => store.returns_OZ)
-  const ordersOZ = useSelector((store) => store.ordered_OZ)
+  const orderUnitsOZ = useSelector((store) => store.ordered_OZ)
 
+
+  async function getBgWB() {
+    console.log("27")
+    console.log(revenueOZ, '<=== revenueOZ')
+    console.log(orderUnitsOZ, '<=== orderUnitsOZ')
+    const dateFromTo = getDataTimeTerm('lastWeek')
     //const dateFromTo = getDataTimeTerm('90Days')
-
-    async function getBgWB() {
-      console.log("27")
-      
-      const dateFromTo = getDataTimeTerm('lastWeek')
-      console.log(bigWB, '<=== bigWB')
-      console.log(revenueOZ, '<=== revenueOZ')
-      dispatch(ReadDate(dateFromTo))
-      //if (!revenue90Doz.length) {
-      let resDays90Oz = await axios.post(
-        "https://api-seller.ozon.ru/v1/analytics/data",
-        {
-          date_from: dateFromTo.date_from,
-          date_to: dateFromTo.date_to,
-          metrics: ["revenue"],
-          dimension: ["day"],
-          filters: [],
-          limit: 1000,
-          offset: 0,
-        },
-        {
-          headers: {
-            "Client-Id": "108699",
-            "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-  
-      dispatch(revenue90Doz(resDays90Oz.data.result.data))
-      // }
-  
-      // if (!revenue90Doz.length) {
-      let resreturnsDays90Oz = await axios.post(
-        "https://api-seller.ozon.ru/v1/analytics/data",
-        {
-          date_from: dateFromTo.date_from,
-          date_to: dateFromTo.date_to,
-          metrics: ["returns"],
-          dimension: ["day"],
-          filters: [],
-          limit: 1000,
-          offset: 0,
-        },
-        {
-          headers: {
-            "Client-Id": "108699",
-            "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      dispatch(returns90Doz(resreturnsDays90Oz.data.result.data))
-      // }
-      let resOrderedUnitsDays90Oz = await axios.post(
-        "https://api-seller.ozon.ru/v1/analytics/data",
-        {
-          date_from: dateFromTo.date_from,
-          date_to: dateFromTo.date_to,
-          metrics: ["returns"],
-          dimension: ["day"],
-          filters: [],
-          limit: 1000,
-          offset: 0,
-        },
-        {
-          headers: {
-            "Client-Id": "108699",
-            "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log("105", resOrderedUnitsDays90Oz.data.result.data);
-      dispatch(orderedUnits90Doz(resOrderedUnitsDays90Oz.data.result.data))
-  
-      if (!bigWB.length) {
-        console.log("true")
-        let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
-        console.log("test=>>>", resBigDwb.data.data);
-        dispatch(bigDataWb(resBigDwb.data.data))
-      }
-  
-      console.log("32")
-    }
-    useEffect(() => {
-      getBgWB()
-    }, [])  
-    /*console.log("27")
-    console.log('bigDataWB: ', bigDataWB.length, bigDataWB);
-
     dispatch(ReadDate(dateFromTo))
-
-    async function getBgWB() {
-      console.log("27")
-  
-      const dateFromTo = getDataTimeTerm('lastWeek')
-      //const dateFromTo = getDataTimeTerm('90Days')
-      dispatch(ReadDate(dateFromTo))
-      //if (!revenue90Doz.length) {
-      let resDays90Oz = await axios.post(
-        "https://api-seller.ozon.ru/v1/analytics/data",
-        {
-          date_from: dateFromTo.date_from,
-          date_to: dateFromTo.date_to,
-          metrics: ["revenue"],
-          dimension: ["day"],
-          filters: [],
-          limit: 1000,
-          offset: 0,
-        },
-        {
-          headers: {
-            "Client-Id": "108699",
-            "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
-            "Content-Type": "application/json",
+    if (!revenueOZ.length) {
+      try {
+        let resDays90Oz = await axios.post(
+          "https://api-seller.ozon.ru/v1/analytics/data",
+          {
+            date_from: dateFromTo.date_from,
+            date_to: dateFromTo.date_to,
+            metrics: ["revenue"],
+            dimension: ["day"],
+            filters: [],
+            limit: 1000,
+            offset: 0,
           },
-        }
-      );
-  
-      dispatch(revenue90Doz(resDays90Oz.data.result.data))
-      // }
-  
-      // if (!revenue90Doz.length) {
+          {
+            headers: {
+              "Client-Id": "108699",
+              "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log("61", resDays90Oz.data.result.data);
+        dispatch(revenue90Doz(resDays90Oz.data.result.data))
+      } catch (error) {
+        console.log("esDays90Oz", error.message, error.status)
+    alert("Слишком много обращений к API OZON")
+      }
+
+    }
+
+    if (!returnOZ.length) {
+      try {
+        
+      
       let resreturnsDays90Oz = await axios.post(
         "https://api-seller.ozon.ru/v1/analytics/data",
         {
@@ -178,14 +94,22 @@ const Brief = () => {
           },
         }
       );
+      console.log("85", resreturnsDays90Oz.data.result.data);
       dispatch(returns90Doz(resreturnsDays90Oz.data.result.data))
-      // }
+    } catch (error) {
+      console.log("resreturnsDays90Oz", error.message, error.status)
+    alert("Слишком много обращений к API OZON returns")
+    }
+    }
+
+    if (orderUnitsOZ.length) {
+      try {
       let resOrderedUnitsDays90Oz = await axios.post(
         "https://api-seller.ozon.ru/v1/analytics/data",
         {
           date_from: dateFromTo.date_from,
           date_to: dateFromTo.date_to,
-          metrics: ["returns"],
+          metrics: ["ordered_units"],
           dimension: ["day"],
           filters: [],
           limit: 1000,
@@ -201,46 +125,25 @@ const Brief = () => {
       );
       console.log("105", resOrderedUnitsDays90Oz.data.result.data);
       dispatch(orderedUnits90Doz(resOrderedUnitsDays90Oz.data.result.data))
-  
-      if (!bigWB.length) {
-        console.log("true")
-        let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
-        console.log("test=>>>", resBigDwb.data.data);
-        dispatch(bigDataWb(resBigDwb.data.data))
-      }
-  
-      console.log("32")
+    } catch (error) {
+      console.log("resOrderedUnitsDays90Oz", error.message, error.status)
+   alert("Слишком много обращений к API OZON Ordered-Units")
     }
-*/
+    }
 
-/* //?
-    let resDays90Oz = await axios.post(
-      "https://api-seller.ozon.ru/v1/analytics/data",
-      {
-        date_from: dateFromTo.date_from,
-        date_to: dateFromTo.date_to,
-        metrics: ["revenue"],
-        dimension: ["day"],
-        filters: [],
-        limit: 1000,
-        offset: 0,
-      },
-      {
-        headers: {
-          "Client-Id": "108699",
-          "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    console.log("88", resDays90Oz.data.result.data);
-    dispatch(revenue90Doz(resDays90Oz.data.result.data))
-    
     if (!bigWB.length) {
+      try {
+        let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo).catch(function (error) {
+          console.log(error.toJSON());
+        });;
+      console.log("resBigDwb=>>>", resBigDwb.status, resBigDwb );
       console.log("true")
-      let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
-      console.log("test=>>>", resBigDwb.data.data);
       dispatch(bigDataWb(resBigDwb.data.data))
+      } catch (error) {
+        console.log("error", error );  
+        alert("Слишком много обращений к API WB")
+      }
+      
     }
 
     console.log("32")
@@ -248,7 +151,7 @@ const Brief = () => {
   useEffect(() => {
     getBgWB()
   }, [])
-*/
+
   function filtrDate(bigDataWB, dateFromTo) {
     const from = Date.parse(dateFromTo.date_from)
     const to = Date.parse(dateFromTo.date_to)
@@ -298,7 +201,7 @@ const Brief = () => {
       try {
         const object = filtrDate(bigWB, ax)
         ordersFunction(object, ax)
-        ozonOrdersFunction(ordersOZ, ax)
+        ozonOrdersFunction(orderUnitsOZ, ax)
        /* const resOrderOz = await axios.post('http://localhost:3001/getapi/ozord', {
           date_from: "2022-08-01"
         });
