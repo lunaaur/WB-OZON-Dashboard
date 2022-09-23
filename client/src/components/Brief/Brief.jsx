@@ -51,8 +51,6 @@ const [isAllLoad, setAllLoad] = useState(false)
           date_from: "2022-08-01"
         });
         const resSalesRefWb = await axios.post('http://localhost:3001/getapi/wbsal', ax);
-        console.log("Ozon1--->", resSalesOz.data)
-        console.log("WB1----->", resSalesRefWb.data)
       } catch (error) {
         console.log(error)
       } finally {
