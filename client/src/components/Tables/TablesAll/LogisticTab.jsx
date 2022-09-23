@@ -10,6 +10,10 @@ import { useSelector } from 'react-redux';
 export const LogisticTab = () => {
 
 
+  const [countWB, setOrdWB] = useState(salesArray)
+  const [countOZ, setOrdOZ] = useState(logisticOz)
+
+
   function lineTrend(arr, poleSort) {
     const n = arr.length // шаг 1
     let summaX = 0
@@ -112,6 +116,8 @@ const OZ = lineTrend(logisticOz, "userGain")
           },
         ],
       })
+      setOrdWB(arrWB)
+      setOrdOZ(arrOZ)
     }, [dataTime])
 
   return (
@@ -151,14 +157,14 @@ const OZ = lineTrend(logisticOz, "userGain")
           <tbody>
             <tr>
               <td>Wildberries</td>
-              <td>{salesArray.reduce((acc, val)=> {
+              <td>{countWB.reduce((acc, val)=> {
             return acc + val.delivery_rub
 
           }, 0)} P</td>
             </tr>
             <tr>
               <td>Ozon</td>
-              <td>{logisticOz.reduce((acc, val)=> {
+              <td>{countOZ.reduce((acc, val)=> {
             return acc + val.userGain
 
           }, 0)} P</td>

@@ -116,6 +116,51 @@ const [sumSales, setSumSelaes] = useState (0)
   },
   );
 
+  const [countWB, setOrdWB] = useState(salesArray)
+  const [countOZ, setOrdOZ] = useState(salesOz)
+
+      const dataTime = useSelector((store) => store.buttonTime)
+
+      useEffect(()=>{
+        function filtrDate(arr, dataObj) {
+          const from = Date.parse(dataObj.date_from)
+          const to = Date.parse(dataObj.date_to)
+          const resArr = []
+          arr.forEach(element => {
+            if (from < Date.parse(element.date) && Date.parse(element.date) < to) {
+              resArr.push(element)
+              
+            }
+          })
+          return resArr.sort((prev, next) => Date.parse(prev.date) - Date.parse(next.date));
+        }
+        const arrWB=filtrDate(salesArray, dataTime)
+        const arrOZ=filtrDate(salesOz, dataTime)
+        setUserData({
+          labels: arrWB.map((data) => data.date),
+          datasets: [
+            {
+              label: "Данные Wildberries",
+              data: arrWB.map((data) => data.retail_amount),
+              backgroundColor: [
+                "rgba(75,192,192,1)",
+              ],
+              borderColor: "black",
+              borderWidth: 2,
+            },{
+              label: "Данные Ozon",
+              data: arrOZ.map((data) => data.totalPrice),
+              backgroundColor: [
+                "red"
+              ],
+              borderColor: "black",
+              borderWidth: 2,
+            },
+          ],
+        })
+        setOrdWB(arrWB)
+        setOrdOZ(arrOZ)
+      }, [dataTime])
 
   return (
     <>
@@ -155,13 +200,13 @@ const [sumSales, setSumSelaes] = useState (0)
         <tbody>
           <tr>
             <td>Wildberries</td>
-            <td>{salesArray.reduce((acc, val) => {
-              return acc + val.retail_amount
+            <td>{countWB.reduce((acc, val) => {
+              return Math.floor(acc + val.retail_amount)
             }, 0)} p</td>
           </tr>
           <tr>
             <td>Ozon</td>
-            <td>{salesOz.reduce((acc, val) => {
+            <td>{countOZ.reduce((acc, val) => {
               return acc + val.totalPrice
 
             }, 0)}</td>

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import LineChart from '../../Chart/LineChart';
 import { refundsWB } from '../../Chart/DataWE';
 import { refundsOZ } from '../../Chart/DataOz';
+import { useSelector } from 'react-redux';
 import s from "./table.module.css";
 
 export const RefTab = () => {
@@ -63,6 +64,52 @@ const OZ = lineTrend(refundsOZ, "quantity")
       },
       );
 
+      const [countWB, setOrdWB] = useState(refundsWB)
+  const [countOZ, setOrdOZ] = useState(refundsOZ)
+
+      const dataTime = useSelector((store) => store.buttonTime)
+
+      useEffect(()=>{
+        function filtrDate(arr, dataObj) {
+          const from = Date.parse(dataObj.date_from)
+          const to = Date.parse(dataObj.date_to)
+          const resArr = []
+          arr.forEach(element => {
+            if (from < Date.parse(element.date) && Date.parse(element.date) < to) {
+              resArr.push(element)
+              
+            }
+          })
+          return resArr.sort((prev, next) => Date.parse(prev.date) - Date.parse(next.date));
+        }
+        const arrWB=filtrDate(refundsWB, dataTime)
+        const arrOZ=filtrDate(refundsOZ, dataTime)
+        setUserData({
+          labels: arrWB.map((data) => data.date),
+          datasets: [
+            {
+              label: "Данные Wildberries",
+              data: arrWB.map((data) => data.quantity),
+              backgroundColor: [
+                "rgba(75,192,192,1)",
+              ],
+              borderColor: "black",
+              borderWidth: 2,
+            },{
+              label: "Данные Ozon",
+              data: arrOZ.map((data) => data.quantity),
+              backgroundColor: [
+                "red"
+              ],
+              borderColor: "black",
+              borderWidth: 2,
+            },
+          ],
+        })
+        setOrdWB(arrWB)
+        setOrdOZ(arrOZ)
+      }, [dataTime])
+
   return (
     <>
     <div style={{ width: '70%' }}>
@@ -100,14 +147,14 @@ const OZ = lineTrend(refundsOZ, "quantity")
           <tbody>
             <tr>
               <td>Wildberries</td>
-              <td>{refundsWB.reduce((acc, val)=> {
+              <td>{countWB.reduce((acc, val)=> {
             return acc + val.quantity
 
           }, 0)}</td>
             </tr>
             <tr>
               <td>Ozon</td>
-              <td>{refundsOZ.reduce((acc, val)=> {
+              <td>{countOZ.reduce((acc, val)=> {
             return acc + val.quantity
 
           }, 0)}</td>
