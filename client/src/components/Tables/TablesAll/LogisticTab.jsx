@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Table from 'react-bootstrap/Table';
 import LineChart from '../../Chart/LineChart';
 import { DataWbLog } from '../../Chart/DataWE';
 import { logisticOz } from '../../Chart/DataOz';
 import s from "./table.module.css";
-import {salesArray} from '../../Chart/DataWE'
+import {salesArray} from '../../Chart/DataWE';
+import { useSelector } from 'react-redux';
 
 export const LogisticTab = () => {
+
 
   function lineTrend(arr, poleSort) {
     const n = arr.length // шаг 1
@@ -64,8 +66,53 @@ const OZ = lineTrend(logisticOz, "userGain")
             borderWidth: 2,
           },
         ],
-      },
+      }
       );
+
+    const dataTime = useSelector((store) => store.buttonTime)
+
+    useEffect(()=>{
+      function filtrDate(arr, dataObj) {
+        const from = Date.parse(dataObj.date_from)
+        const to = Date.parse(dataObj.date_to)
+        const resArr = []
+        arr.forEach(element => {
+          if (from < Date.parse(element.date) && Date.parse(element.date) < to) {
+            resArr.push(element)
+            
+          }
+        })
+        return resArr.sort((prev, next) => Date.parse(prev.date) - Date.parse(next.date));
+      }
+      const arrWB=filtrDate(salesArray, dataTime)
+      const arrOZ=filtrDate(logisticOz, dataTime)
+      setUserData({
+        labels: arrWB.map((data) => data.date),
+        datasets: [
+          {
+            label: "Данные Wildberries",
+            data: arrWB.map((data) => data.delivery_rub),
+            backgroundColor: [
+              "rgba(75,192,192,1)",
+              "#ecf0f1",
+              "#50AF95",
+              "#f3ba2f",
+              "#2a71d0",
+            ],
+            borderColor: "black",
+            borderWidth: 2,
+          },{
+            label: "Данные Ozon",
+            data: arrOZ.map((data) => data.userGain),
+            backgroundColor: [
+              "red"
+            ],
+            borderColor: "black",
+            borderWidth: 2,
+          },
+        ],
+      })
+    }, [dataTime])
 
   return (
     <>

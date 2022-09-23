@@ -22,43 +22,43 @@ const [sumSales, setSumSelaes] = useState (0)
 
   // const [data, setData] = useState(false);
   let newFilterArr
-  useEffect(() => {
-    if (tableData?.data?.length) {
+  // useEffect(() => {
+  //   if (tableData?.data?.length) {
 
-      newFilterArr = mainFunction(tableData, { date_from: "2022-09-12", date_to: "2022-09-18" })
-      const nfa = newFilterArr.flat()
-      const line = lineTrend(nfa, "retail_amount")
-      console.log('line: ', line);
+  //     newFilterArr = mainFunction(tableData, { date_from: "2022-09-12", date_to: "2022-09-18" })
+  //     const nfa = newFilterArr.flat()
+  //     const line = lineTrend(nfa, "retail_amount")
+  //     console.log('line: ', line);
 
-      setWbLine(line)
-      setSumSelaes(nfa.reduce((acc, val) => {
-        return acc + val.retail_amount
+  //     setWbLine(line)
+  //     setSumSelaes(nfa.reduce((acc, val) => {
+  //       return acc + val.retail_amount
     
-      }, 0))
-      setUserData({
-        labels: nfa.map((data) => data.date),
-        datasets: [
-          {
-            label: "Данные Wildberries",
-            data: nfa.map((data) => data.retail_amount),
-            backgroundColor: [
-              "rgba(75,192,192,1)",
-            ],
-            borderColor: "black",
-            borderWidth: 2,
-          }, {
-            label: "Данные Ozon",
-            data: salesOz.map((data) => data.totalPrice),
-            backgroundColor: [
-              "red"
-            ],
-            borderColor: "black",
-            borderWidth: 2,
-          },
-        ],
-      })
-    }
-  }, [tableData])
+  //     }, 0))
+  //     setUserData({
+  //       labels: nfa.map((data) => data.date),
+  //       datasets: [
+  //         {
+  //           label: "Данные Wildberries",
+  //           data: nfa.map((data) => data.retail_amount),
+  //           backgroundColor: [
+  //             "rgba(75,192,192,1)",
+  //           ],
+  //           borderColor: "black",
+  //           borderWidth: 2,
+  //         }, {
+  //           label: "Данные Ozon",
+  //           data: salesOz.map((data) => data.totalPrice),
+  //           backgroundColor: [
+  //             "red"
+  //           ],
+  //           borderColor: "black",
+  //           borderWidth: 2,
+  //         },
+  //       ],
+  //     })
+  //   }
+  // }, [tableData])
 
 
   function lineTrend(arr, poleSort) {

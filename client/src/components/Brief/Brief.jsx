@@ -9,7 +9,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { getDataTimeTerm } from '../../pages/main/helpers/getDate';
 import { useDispatch, useSelector } from 'react-redux';
-import { bigDataWb } from '../../store/action'
+import { bigDataWb, buttonTime } from '../../store/action'
 import { useEffect } from 'react';
 import {Watch} from 'react-loader-spinner'
 
@@ -38,89 +38,76 @@ const [isAllLoad, setAllLoad] = useState(false)
     getBgWB()
   }, [])
 
-  function filtrDate(arr, dataObj) {
-    const from = Date.parse(dataObj.date_from)
-    const to = Date.parse(dataObj.date_to)
-    const resArr = []
-    arr.forEach(element => {
-      if (from < Date.parse(element.rr_dt) && Date.parse(element.rr_dt) < to) {
-        resArr.push(element)
-  
-      }
-    })
-    return resArr.sort((prev, next) => Date.parse(prev.rr_dt) - Date.parse(next.rr_dt));
-  }
-
-
-
   const getApiOzWb = async (e, inputs) => {
 
     const dataTerm = e.target.getAttribute("data-time")
     const dataId = inputs
     const ax = getDataTimeTerm(dataTerm, inputs)
+    console.log("ax----->", ax)
+    dispatch(buttonTime(ax))
 
-    const sale = async () => {
-      setLoadSal(true)
-      try {
-        const resSalesOz = await axios.post('http://localhost:3001/getapi/ozsal', {
-          date_from: "2022-08-01"
-        });
-        const resSalesRefWb = await axios.post('http://localhost:3001/getapi/wbsal', ax);
-      } catch (error) {
-        console.log(error)
-      } finally {
-        setLoadSal(false)
-      }
-    }
-    sale()
+    // const sale = async () => {
+    //   setLoadSal(true)
+    //   try {
+    //     const resSalesOz = await axios.post('http://localhost:3001/getapi/ozsal', {
+    //       date_from: "2022-08-01"
+    //     });
+    //     const resSalesRefWb = await axios.post('http://localhost:3001/getapi/wbsal', ax);
+    //   } catch (error) {
+    //     console.log(error)
+    //   } finally {
+    //     setLoadSal(false)
+    //   }
+    // }
+    // sale()
 
-    const order = async () => {
-      setLoadOrd(true)
-      try {
-        const resOrderOz = await axios.post('http://localhost:3001/getapi/ozord', {
-          date_from: "2022-08-01"
-        });
-        const resOrderWb = await axios.post('http://localhost:3001/getapi/wbord', ax);
-      } catch (error) {
-        console.log(error)
-      } finally {
-        setLoadOrd(false)
-      }
-    }
-    order()
+    // const order = async () => {
+    //   setLoadOrd(true)
+    //   try {
+    //     const resOrderOz = await axios.post('http://localhost:3001/getapi/ozord', {
+    //       date_from: "2022-08-01"
+    //     });
+    //     const resOrderWb = await axios.post('http://localhost:3001/getapi/wbord', ax);
+    //   } catch (error) {
+    //     console.log(error)
+    //   } finally {
+    //     setLoadOrd(false)
+    //   }
+    // }
+    // order()
 
-    const ref = async () => {
-      setLoadRef(true)
-      try {
-        const resRefOz = await axios.post('http://localhost:3001/getapi/ozref', {
-          date_from: "2022-08-01",
-          date_to: "2022-09-01",
-        });
-        const resRefWb = await axios.post('http://localhost:3001/getapi/wbref', ax);
-      } catch (error) {
-        console.log(error)
-      } finally {
-        setLoadRef(false)
-      }
-    }
-    ref()
+    // const ref = async () => {
+    //   setLoadRef(true)
+    //   try {
+    //     const resRefOz = await axios.post('http://localhost:3001/getapi/ozref', {
+    //       date_from: "2022-08-01",
+    //       date_to: "2022-09-01",
+    //     });
+    //     const resRefWb = await axios.post('http://localhost:3001/getapi/wbref', ax);
+    //   } catch (error) {
+    //     console.log(error)
+    //   } finally {
+    //     setLoadRef(false)
+    //   }
+    // }
+    // ref()
 
-    const log = async () => {
-      setLoadLog(true)
-      try {
-        const resLogOz = await axios.post('http://localhost:3001/getapi/ozlog', {
-          date_from: "2022-08-01",
-          date_to: "2022-09-01",
-        });
-        const resLogWb = await axios.post('http://localhost:3001/getapi/wblog', ax);
-      } catch (error) {
-        console.log(error)
-      } finally {
-        setLoadLog(false)
-      }
-    }
-    log()
-    console.log("AX----->", ax)
+    // const log = async () => {
+    //   setLoadLog(true)
+    //   try {
+    //     const resLogOz = await axios.post('http://localhost:3001/getapi/ozlog', {
+    //       date_from: "2022-08-01",
+    //       date_to: "2022-09-01",
+    //     });
+    //     const resLogWb = await axios.post('http://localhost:3001/getapi/wblog', ax);
+    //   } catch (error) {
+    //     console.log(error)
+    //   } finally {
+    //     setLoadLog(false)
+    //   }
+    // }
+    // log()
+    // console.log("AX----->", ax)
   }
 
   const formHendler = (e) => {
