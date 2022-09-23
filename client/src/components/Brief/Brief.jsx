@@ -98,14 +98,15 @@ const Brief = () => {
     }
     }
 
-    if (orderUnitsOZ.length) {
+    if (!orderUnitsOZ.length) {
       try {
+        console.log("заходим");
       let resOrderedUnitsDays90Oz = await axios.post(
         "https://api-seller.ozon.ru/v1/analytics/data",
         {
           date_from: dateFromTo.date_from,
           date_to: dateFromTo.date_to,
-          metrics: ["returns"],
+          metrics: ["ordered_units"],
           dimension: ["day"],
           filters: [],
           limit: 1000,
@@ -139,8 +140,7 @@ const Brief = () => {
         console.log("error", error );  
         alert("Слишком много обращений к API WB")
       }
-      
-    }
+      }
 
     console.log("32")
   }
