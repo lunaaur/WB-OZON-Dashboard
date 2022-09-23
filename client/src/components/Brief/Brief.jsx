@@ -31,7 +31,6 @@ const [isAllLoad, setAllLoad] = useState(false)
     setAllLoad(true)
     const dateFromTo = getDataTimeTerm('lastWeek')
     let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
-    console.log("test", resBigDwb.data);
     dispatch(bigDataWb(resBigDwb.data))
     setAllLoad(false)
   }
@@ -175,16 +174,16 @@ const [isAllLoad, setAllLoad] = useState(false)
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      {/* {
+      {
         (isAllLoad)? 
         <Watch/>
-        : */}
+        :
         <Index
         isLoadSal={isLoadSal}
         isLoadOrd={isLoadOrd}
         isLoadRef={isLoadRef}
         isLoadLog={isLoadLog} />
-       {/* } */}
+       }
       
     </>
   )
