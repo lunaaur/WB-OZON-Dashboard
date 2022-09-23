@@ -172,12 +172,9 @@ const [sumSales, setSumSelaes] = useState (0)
     return { yMin: resultA, yMax: resultB }
   }
 
-  // console.log('trendLine------>',lineTrend(arrOne, "totalPrice"))
 
   const OZ = lineTrend(salesOz, "totalPrice")
 
-  console.log('initWB', Wbline,)
-  // const WB = lineTrend(nfa, "retail_amount")
 
   const [userData, setUserData] = useState({
     labels: salesArray.map((data) => data.date),
