@@ -18,7 +18,6 @@ function App() {
       <>
         <Main/>
       </>
-      <h1>WB-OZON</h1>
     </Provider>
     </BrowserRouter>
   );

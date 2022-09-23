@@ -5,14 +5,17 @@ import { useForm } from "react-hook-form";
 // import { Routes, Route } from 'react-router-dom;'
 // import { getApiOzWb } from '../../pages/main/API/endPointApi';
 // import { getApiOzWb } from '../Tables/index';
+import {mainFunction, returnsFunction, ordersFunction} from '../../../src/helpers/apiWB'
+import { ozonSalesFunction, ozonOrdersFunction, ozonRefundsFunction } from '../../helpers/apiOZ';
+
 import axios from 'axios';
 import { getDataTimeTerm } from '../../pages/main/helpers/getDate';
 import { useDispatch, useSelector } from 'react-redux';
-import { bigDataWb, revenue90Doz, ReadDate } from '../../store/action'
+import { bigDataWb, revenue90Doz, returns90Doz, orderedUnits90Doz, ReadDate } from '../../store/action'
 import { useEffect } from 'react';
 import { Watch } from 'react-loader-spinner'
 
-
+import styles from '../styles.css'
 
 const Brief = () => {
 
@@ -23,16 +26,194 @@ const Brief = () => {
   const [isLoadRef, setLoadRef] = useState(false)
   const [isLoadLog, setLoadLog] = useState(false)
 
-  const [inputs, setInputs] = useState({ dateFrom: "", dateTo: "" })
+  const [inputs, setInputs] = useState({ date_from: "", date_to: "" })
   const dispatch = useDispatch()
-  const bigDataWB = useSelector((store) => store.bigDataWB)
 
-  async function getBgWB() {
-    console.log("27")
+  const bigWB = useSelector((store) => store.bigDataWB)
+  const revenueOZ = useSelector((store) => store.revenue_OZ)
+  const returnOZ = useSelector((store) => store.returns_OZ)
+  const ordersOZ = useSelector((store) => store.ordered_OZ)
+
+    //const dateFromTo = getDataTimeTerm('90Days')
+
+    async function getBgWB() {
+      console.log("27")
+      
+      const dateFromTo = getDataTimeTerm('90Days')
+      console.log(bigWB, '<=== bigWB')
+      console.log(revenueOZ, '<=== revenueOZ')
+      dispatch(ReadDate(dateFromTo))
+      //if (!revenue90Doz.length) {
+      let resDays90Oz = await axios.post(
+        "https://api-seller.ozon.ru/v1/analytics/data",
+        {
+          date_from: dateFromTo.date_from,
+          date_to: dateFromTo.date_to,
+          metrics: ["revenue"],
+          dimension: ["day"],
+          filters: [],
+          limit: 1000,
+          offset: 0,
+        },
+        {
+          headers: {
+            "Client-Id": "108699",
+            "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      dispatch(revenue90Doz(resDays90Oz.data.result.data))
+      // }
+  
+      // if (!revenue90Doz.length) {
+      let resreturnsDays90Oz = await axios.post(
+        "https://api-seller.ozon.ru/v1/analytics/data",
+        {
+          date_from: dateFromTo.date_from,
+          date_to: dateFromTo.date_to,
+          metrics: ["returns"],
+          dimension: ["day"],
+          filters: [],
+          limit: 1000,
+          offset: 0,
+        },
+        {
+          headers: {
+            "Client-Id": "108699",
+            "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      dispatch(returns90Doz(resreturnsDays90Oz.data.result.data))
+      // }
+      let resOrderedUnitsDays90Oz = await axios.post(
+        "https://api-seller.ozon.ru/v1/analytics/data",
+        {
+          date_from: dateFromTo.date_from,
+          date_to: dateFromTo.date_to,
+          metrics: ["returns"],
+          dimension: ["day"],
+          filters: [],
+          limit: 1000,
+          offset: 0,
+        },
+        {
+          headers: {
+            "Client-Id": "108699",
+            "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("105", resOrderedUnitsDays90Oz.data.result.data);
+      dispatch(orderedUnits90Doz(resOrderedUnitsDays90Oz.data.result.data))
+  
+      if (!bigWB.length) {
+        console.log("true")
+        let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
+        console.log("test=>>>", resBigDwb.data.data);
+        dispatch(bigDataWb(resBigDwb.data.data))
+      }
+  
+      console.log("32")
+    }
+    useEffect(() => {
+      getBgWB()
+    }, [])  
+    /*console.log("27")
     console.log('bigDataWB: ', bigDataWB.length, bigDataWB);
 
-    const dateFromTo = getDataTimeTerm('lastWeek')
     dispatch(ReadDate(dateFromTo))
+
+    async function getBgWB() {
+      console.log("27")
+  
+      const dateFromTo = getDataTimeTerm('lastWeek')
+      //const dateFromTo = getDataTimeTerm('90Days')
+      dispatch(ReadDate(dateFromTo))
+      //if (!revenue90Doz.length) {
+      let resDays90Oz = await axios.post(
+        "https://api-seller.ozon.ru/v1/analytics/data",
+        {
+          date_from: dateFromTo.date_from,
+          date_to: dateFromTo.date_to,
+          metrics: ["revenue"],
+          dimension: ["day"],
+          filters: [],
+          limit: 1000,
+          offset: 0,
+        },
+        {
+          headers: {
+            "Client-Id": "108699",
+            "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+  
+      dispatch(revenue90Doz(resDays90Oz.data.result.data))
+      // }
+  
+      // if (!revenue90Doz.length) {
+      let resreturnsDays90Oz = await axios.post(
+        "https://api-seller.ozon.ru/v1/analytics/data",
+        {
+          date_from: dateFromTo.date_from,
+          date_to: dateFromTo.date_to,
+          metrics: ["returns"],
+          dimension: ["day"],
+          filters: [],
+          limit: 1000,
+          offset: 0,
+        },
+        {
+          headers: {
+            "Client-Id": "108699",
+            "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      dispatch(returns90Doz(resreturnsDays90Oz.data.result.data))
+      // }
+      let resOrderedUnitsDays90Oz = await axios.post(
+        "https://api-seller.ozon.ru/v1/analytics/data",
+        {
+          date_from: dateFromTo.date_from,
+          date_to: dateFromTo.date_to,
+          metrics: ["returns"],
+          dimension: ["day"],
+          filters: [],
+          limit: 1000,
+          offset: 0,
+        },
+        {
+          headers: {
+            "Client-Id": "108699",
+            "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("105", resOrderedUnitsDays90Oz.data.result.data);
+      dispatch(orderedUnits90Doz(resOrderedUnitsDays90Oz.data.result.data))
+  
+      if (!bigWB.length) {
+        console.log("true")
+        let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
+        console.log("test=>>>", resBigDwb.data.data);
+        dispatch(bigDataWb(resBigDwb.data.data))
+      }
+  
+      console.log("32")
+    }
+*/
+
+/* //?
     let resDays90Oz = await axios.post(
       "https://api-seller.ozon.ru/v1/analytics/data",
       {
@@ -55,7 +236,7 @@ const Brief = () => {
     console.log("88", resDays90Oz.data.result.data);
     dispatch(revenue90Doz(resDays90Oz.data.result.data))
     
-    if (!bigDataWB.length) {
+    if (!bigWB.length) {
       console.log("true")
       let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
       console.log("test=>>>", resBigDwb.data.data);
@@ -67,6 +248,20 @@ const Brief = () => {
   useEffect(() => {
     getBgWB()
   }, [])
+*/
+  function filtrDate(bigDataWB, dateFromTo) {
+    const from = Date.parse(dateFromTo.date_from)
+    const to = Date.parse(dateFromTo.date_to)
+    const resArr = []
+
+    bigDataWB.forEach(element => {
+      if (from < Date.parse(element.rr_dt) && Date.parse(element.rr_dt) < to) {
+        resArr.push(element)
+  
+      }
+    })
+    return resArr.sort((prev, next) => Date.parse(prev.rr_dt) - Date.parse(next.rr_dt));
+  }
 
   const getApiOzWb = async (e, inputs) => {
 
@@ -75,14 +270,21 @@ const Brief = () => {
     const ax = getDataTimeTerm(dataTerm, inputs)
 
     const sale = async () => {
+      const object = filtrDate(bigWB, ax)
+      console.log(ax, 'ax')  
+    //  const objectOz = filtrDate(revenueOZ)
+      console.log(object, 'formatedOBJECT')
       setLoadSal(true)
       try {
-        const resSalesOz = await axios.post('http://localhost:3001/getapi/ozsal', {
+
+      /*  const resSalesOz = await axios.post('http://localhost:3001/getapi/ozsal', {
           date_from: "2022-08-01"
         });
         const resSalesRefWb = await axios.post('http://localhost:3001/getapi/wbsal', ax);
-        console.log("Ozon1--->", resSalesOz.data)
-        console.log("WB1----->", resSalesRefWb.data)
+       console.log("Ozon1--->", resSalesOz.data)
+        console.log("WB1----->", resSalesRefWb.data)*/
+        mainFunction(object, ax)
+        ozonSalesFunction(revenueOZ, ax)
       } catch (error) {
         console.log(error)
       } finally {
@@ -94,10 +296,13 @@ const Brief = () => {
     const order = async () => {
       setLoadOrd(true)
       try {
-        const resOrderOz = await axios.post('http://localhost:3001/getapi/ozord', {
+        const object = filtrDate(bigWB, ax)
+        ordersFunction(object, ax)
+        ozonOrdersFunction(ordersOZ, ax)
+       /* const resOrderOz = await axios.post('http://localhost:3001/getapi/ozord', {
           date_from: "2022-08-01"
         });
-        const resOrderWb = await axios.post('http://localhost:3001/getapi/wbord', ax);
+        const resOrderWb = await axios.post('http://localhost:3001/getapi/wbord', ax);*/
       } catch (error) {
         console.log(error)
       } finally {
@@ -109,11 +314,14 @@ const Brief = () => {
     const ref = async () => {
       setLoadRef(true)
       try {
-        const resRefOz = await axios.post('http://localhost:3001/getapi/ozref', {
+        const object = filtrDate(bigWB, ax)
+        returnsFunction(object, ax)
+        ozonRefundsFunction(returnOZ, ax)
+       /*const resRefOz = await axios.post('http://localhost:3001/getapi/ozref', {
           date_from: "2022-08-01",
           date_to: "2022-09-01",
         });
-        const resRefWb = await axios.post('http://localhost:3001/getapi/wbref', ax);
+        const resRefWb = await axios.post('http://localhost:3001/getapi/wbref', ax);*/
       } catch (error) {
         console.log(error)
       } finally {
@@ -122,7 +330,7 @@ const Brief = () => {
     }
     ref()
 
-    const log = async () => {
+    /*const log = async () => {
       setLoadLog(true)
       try {
         const resLogOz = await axios.post('http://localhost:3001/getapi/ozlog', {
@@ -136,14 +344,14 @@ const Brief = () => {
         setLoadLog(false)
       }
     }
-    log()
+    log()*/
     console.log("AX----->", ax)
   }
 
   const formHendler = (e) => {
     e.preventDefault()
 
-    if (inputs.dateFrom && inputs.dateTo) {
+    if (inputs.date_from && inputs.date_to) {
       console.log("res", inputs)
       getApiOzWb(e, inputs)
     }
@@ -157,7 +365,7 @@ const Brief = () => {
   return (
     <>
       <Navbar bg="light" expand="sm" className="d-flex flex-row justify-content-around text-center">
-        <Navbar.Brand>Сводка</Navbar.Brand>
+        <Navbar.Brand></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
@@ -168,12 +376,12 @@ const Brief = () => {
             <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" data-time="lastMonth" onClick={getApiOzWb}>Прошлый месяц</Button>
             <Button variant="outline-secondary" className="border border-secondary rounded" size="sm" data-time="90Days" onClick={getApiOzWb}>90 дней</Button>
 
-            <Form onSubmit={formHendler} data-time="form" name="form" className="border border-secondary rounded">
+            <Form onSubmit={formHendler} data-time="form" name="form" className="border border-secondary rounded" id="btn1">
               <div className="input-group col-xs-3">
                 <input type="date" className="form-control" name="dateFrom" value={inputs.from} onChange={formHendler} style={{ border: "none" }} />
                 <input type="date" className="form-control" name="dateTo" value={inputs.to} onChange={formHendler} style={{ border: "none" }} />
-                <div className="input-group-prepend">
-                  <Button type="submit" className="border border-secondary rounded" variant="secondary" size="lg">
+                <div className="input-group-prepend" id="choose">
+                  <Button type="submit" id="sbm" className="border border-secondary rounded" variant="secondary" size="lg">
                     Выбрать
                   </Button>
                 </div>
@@ -190,7 +398,7 @@ const Brief = () => {
                 Separated link
               </NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Все ключи API" id="basic-nav-dropdown" className="border border-secondary rounded">
+            <NavDropdown title="Все ключи API" id="basic-nav-dropdown" className="border border-secondary rounded 2">
               <NavDropdown.Item href="#action">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action">
                 Another action
