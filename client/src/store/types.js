@@ -1,5 +1,4 @@
 const actionTypes = {
-    // указываем списком все actions
-}
+    BIG_DATA_WB: "BIG_DATA_WB",}
 
 export default actionTypes;

@@ -1,6 +1,6 @@
 import { legacy_createStore as createStore, applyMiddleware} from 'redux';
 import { composeWithDevTools} from '@redux-devtools/extension';
-import { reducers } from './reducer';
+import { reducers } from './reducers';
 import thunkMiddleware from 'redux-thunk';
 
 const composeEnchancer = 

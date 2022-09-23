@@ -1,82 +1,75 @@
 import * as dayjs from 'dayjs'
 import local from 'dayjs/locale/ru'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
+import weekday from 'dayjs/plugin/weekday'
+import locale_ru from 'dayjs/locale/ru'
 
-function getDataTimeTerm(period, inputs) {
-    const nowDay = dayjs()
+export const getDataTimeTerm = (period, inputs) => {
+    dayjs.extend(customParseFormat)
+    dayjs.extend(weekday)
+
+    const nowDay = dayjs().locale('ru')
+
 
     switch (period) {
         case 'yesterday':
-            const temp = dayjs().subtract(1, 'day')
+            const temp = nowDay.subtract(1, 'day').format('YYYY-MM-DD')
             const yesterday =
             {
-                date_from: `${temp.$y}-${temp.$M + 1}-${temp.$D}`,
-                date_to: `${temp.$y}-${temp.$M + 1}-${temp.$D}`,
+                date_from: temp,
+                date_to: temp,
             }
             return yesterday
 
         case 'week':
-            const today = new Date();
-            const tempFrom = function () {
-                let nowDay = today.getDay()
-                if (nowDay === 1) {
-                    return `${today.getMonth() + 1}-${today.getDate()}`
-                }
-                if (nowDay === 0) {
-                    return `${today.getMonth() + 1}-${today.getDate()-6}`
-                }
-                else {
-                    return `${today.getMonth() + 1}-${today.getDate()-(nowDay-1)}`
-                }
-            }
-
+            const toWeek = nowDay.format('YYYY-MM-DD')
+            const fromWeek = nowDay.startOf('w').format('YYYY-MM-DD')
             const week =
             {
-                date_from: `${today.getFullYear()}-${tempFrom()}`,
-                date_to: `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`,
+                date_from: fromWeek,
+                date_to: toWeek,
             }
             return week
 
         case 'lastWeek':
             const temp2 = nowDay.subtract(1, 'w')
-            const temp22 = temp2.startOf('week')
-            const temp23 = temp2.endOf('week')
+            const fromLastWeek = temp2.startOf('week').format('YYYY-MM-DD')
+            const toLastWeek = temp2.endOf('week').format('YYYY-MM-DD')
             const lastWeek =
             {
-                date_from: `${temp22.$y}-${temp22.$M + 1}-${temp22.$D + 1}`,
-                date_to: `${temp23.$y}-${temp23.$M + 1}-${temp23.$D + 1}`,
+                date_from: fromLastWeek,
+                date_to: toLastWeek,
             }
-            console.log("Last Week - helper", lastWeek);
             return lastWeek
 
         case 'month':
-            const temp3 = nowDay
-            const temp32 = nowDay.startOf('M')
+            const fromMonth = nowDay.format('YYYY-MM-DD')
+            const toMonth = nowDay.startOf('M').format('YYYY-MM-DD')
             const month =
             {
-                date_from: `${temp32.$y}-${temp32.$M + 1}-${temp32.$D}`,
-                date_to: `${temp3.$y}-${temp3.$M + 1}-${temp3.$D}`,
+                date_from: toMonth,
+                date_to: fromMonth
             }
             return month
 
         case 'lastMonth':
-            const temp4 = nowDay.subtract(1, 'month')
-            const temp42 = temp4.startOf('M')
-            const temp43 = temp4.endOf('M')
+            const temp4= nowDay.subtract(1, 'month')
+            const fromLastMonth = temp4.startOf('M').format('YYYY-MM-DD')
+            const toLastMonth = temp4.endOf('M').format('YYYY-MM-DD')
             const lastMonth =
             {
-                date_from: `${temp42.$y}-${temp42.$M + 1}-${temp42.$D}`,
-                date_to: `${temp43.$y}-${temp43.$M + 1}-${temp43.$D}`,
+                date_from: fromLastMonth,
+                date_to: toLastMonth,
             }
-            console.log("Last Month - helper", lastMonth);
             return lastMonth
 
         case '90Days':
-            const temp5 = nowDay
-            const temp52 = nowDay.subtract(90, 'd')
+            const from90Days = nowDay.subtract(90, 'd').format('YYYY-MM-DD')
+            const to90Days = nowDay.format('YYYY-MM-DD')
             const Days90 =
             {
-                date_from: `${temp52.$y}-${temp52.$M + 1}-${temp52.$D}`,
-                date_to: `${temp5.$y}-${temp5.$M + 1}-${temp5.$D}`,
+                date_from: from90Days,
+                date_to: to90Days,
             }
             return Days90
 
@@ -88,6 +81,3 @@ function getDataTimeTerm(period, inputs) {
             break
     }
 }
-
-
-export { getDataTimeTerm }
