@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import LineChart from '../../Chart/LineChart';
 import { DataWbLog } from '../../Chart/DataWE';
-import { DataOzonLog } from '../../Chart/DataOz';
+import { logisticOz } from '../../Chart/DataOz';
 import s from "./table.module.css";
 import {salesArray} from '../../Chart/DataWE'
 
@@ -36,7 +36,7 @@ export const LogisticTab = () => {
 
   // console.log('trendLine------>',lineTrend(arrOne, "totalPrice"))
 const WB = lineTrend(salesArray, "delivery_rub")
-const OZ = lineTrend(DataOzonLog, "userGain")
+const OZ = lineTrend(logisticOz, "userGain")
 
 
     const [userData, setUserData] = useState({
@@ -56,7 +56,7 @@ const OZ = lineTrend(DataOzonLog, "userGain")
             borderWidth: 2,
           },{
             label: "Данные Ozon",
-            data: DataOzonLog.map((data) => data.userGain),
+            data: logisticOz.map((data) => data.userGain),
             backgroundColor: [
               "red"
             ],
@@ -107,11 +107,14 @@ const OZ = lineTrend(DataOzonLog, "userGain")
               <td>{salesArray.reduce((acc, val)=> {
             return acc + val.delivery_rub
 
-          }, 0)}</td>
+          }, 0)} P</td>
             </tr>
             <tr>
               <td>Ozon</td>
-              <td>↑ 31 450 P</td>
+              <td>{logisticOz.reduce((acc, val)=> {
+            return acc + val.userGain
+
+          }, 0)} P</td>
             </tr>
           </tbody>
               </Table>

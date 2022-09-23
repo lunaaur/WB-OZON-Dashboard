@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import LineChart from '../../Chart/LineChart';
 import { refundsWB } from '../../Chart/DataWE';
-import { DataOzonRef } from '../../Chart/DataOz';
+import { refundsOZ } from '../../Chart/DataOz';
 import s from "./table.module.css";
 
 export const RefTab = () => {
@@ -37,6 +37,7 @@ export const RefTab = () => {
 
   // console.log('trendLine------>',lineTrend(arrOne, "totalPrice"))
 const WB = lineTrend(refundsWB, "quantity")
+const OZ = lineTrend(refundsOZ, "quantity")
 
     const [userData, setUserData] = useState({
         labels: refundsWB.map((data) => data.date),
@@ -51,7 +52,7 @@ const WB = lineTrend(refundsWB, "quantity")
             borderWidth: 2,
           },{
             label: "Данные Ozon",
-            data: DataOzonRef.map((data) => data.userGain),
+            data: refundsOZ.map((data) => data.quantity),
             backgroundColor: [
               "red"
             ],
@@ -79,8 +80,8 @@ const WB = lineTrend(refundsWB, "quantity")
           },
           line2: {
             type: 'line',
-            yMin: 50000,
-            yMax: 56470,
+            yMin: OZ.yMin,
+            yMax: OZ.yMax,
             borderColor: 'rgb(30, 144, 255)',
             borderWidth: 2,
           }
@@ -106,7 +107,10 @@ const WB = lineTrend(refundsWB, "quantity")
             </tr>
             <tr>
               <td>Ozon</td>
-              <td>↑ 400050 P</td>
+              <td>{refundsOZ.reduce((acc, val)=> {
+            return acc + val.quantity
+
+          }, 0)}</td>
             </tr>
           </tbody>
               </Table>

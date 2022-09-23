@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import LineChart from '../../Chart/LineChart';
 import { ordersArray } from '../../Chart/DataWE';
-import { DataOzonOrd } from '../../Chart/DataOz';
+import { orderOz } from '../../Chart/DataOz';
 import s from "./table.module.css";
 
 export const OrderTab = () => {
@@ -19,7 +19,7 @@ export const OrderTab = () => {
             borderWidth: 2,
           },{
             label: "Данные Ozon",
-            data: DataOzonOrd.map((data) => data.userGain),
+            data: orderOz.map((data) => data.totalPrice),
             backgroundColor: [
               "red"
             ],
@@ -31,6 +31,7 @@ export const OrderTab = () => {
       );
 
       function lineTrend(arr, poleSort) {
+        console.log('arr---->',arr)
         const n = arr.length // шаг 1
         let summaX = 0
         let summaY = 0
@@ -59,7 +60,9 @@ export const OrderTab = () => {
       }
 
   const WB = lineTrend(ordersArray, "quantity")
-  console.log("WB----->", WB)
+  const OZ = lineTrend(orderOz, "totalPrice")
+  console.log('WB------>', WB)
+  console.log("OZ----->", OZ)
 
   return (
     <>
@@ -78,8 +81,8 @@ export const OrderTab = () => {
           },
           line2: {
             type: 'line',
-            yMin: 70000,
-            yMax: 6000,
+            yMin: OZ.yMin,
+            yMax: OZ.yMax,
             borderColor: 'rgb(30, 144, 255)',
             borderWidth: 2,
           }
@@ -109,7 +112,10 @@ export const OrderTab = () => {
         <tr>
           <td>Ozon</td>
           
-          <td>↑ 4 050 P</td>
+          <td>{orderOz.reduce((acc, val)=> {
+            return acc + val.totalPrice
+
+          }, 0)}</td>
         </tr>
         
       </tbody>

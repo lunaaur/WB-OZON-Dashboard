@@ -106,356 +106,6 @@ export const DataOzonOrd = [
                 },
                 ]
 
-                // export const testAPIData = {
-                //     "result": {
-                //       "data": [
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-01",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-02",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-03",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-04",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             3000
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-05",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-06",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-07",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-08",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             870
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-09",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-10",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-11",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-12",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-13",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-14",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-15",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             1935
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-16",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-17",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-18",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-19",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-20",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-21",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-22",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             560
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {
-                //               "id": "2022-08-23",
-                //               "name": ""
-                //             }
-                //           ],
-                //           "metrics": [
-                //             0
-                //           ]
-                //         },
-                //         {
-                //           "dimensions": [
-                //             {"id": "2022-08-24",
-                //             "name": ""
-                //           }
-                //         ],
-                //         "metrics": [
-                //           0
-                //         ]
-                //       },
-                //       {
-                //         "dimensions": [
-                //           {
-                //             "id": "2022-08-25",
-                //             "name": ""
-                //           }
-                //         ],
-                //         "metrics": [
-                //           1500
-                //         ]
-                //       },
-                //       {
-                //         "dimensions": [
-                //           {
-                //             "id": "2022-08-26",
-                //             "name": ""
-                //           }
-                //         ],
-                //         "metrics": [
-                //           0
-                //         ]
-                //       },
-                //       {
-                //         "dimensions": [
-                //           {
-                //             "id": "2022-08-27",
-                //             "name": ""
-                //           }
-                //         ],
-                //         "metrics": [
-                //           0
-                //         ]
-                //       },
-                //       {
-                //         "dimensions": [
-                //           {
-                //             "id": "2022-08-28",
-                //             "name": ""
-                //           }
-                //         ],
-                //         "metrics": [
-                //           0
-                //         ]
-                //       },
-                //       {
-                //         "dimensions": [
-                //           {
-                //             "id": "2022-08-29",
-                //             "name": ""
-                //           }
-                //         ],
-                //         "metrics": [
-                //           0
-                //         ]
-                //       },
-                //       {
-                //         "dimensions": [
-                //           {
-                //             "id": "2022-08-30",
-                //             "name": ""
-                //           }
-                //         ],
-                //         "metrics": [
-                //           1120
-                //         ]
-                //       },
-                //       {
-                //         "dimensions": [
-                //           {
-                //             "id": "2022-08-31",
-                //             "name": ""
-                //           }
-                //         ],
-                //         "metrics": [
-                //           0
-                //         ]
-                //       }
-                //     ],
-                //     "totals": [
-                //       8985
-                //     ]
-                //   },
-                //   "timestamp": "2022-09-15 12:45:43"
-                // }
 
                export const salesOz = [
                     {date: "2022-08-01", totalPrice :0},
@@ -489,5 +139,108 @@ export const DataOzonOrd = [
                    {date: "2022-08-29", totalPrice: 0},
                    {date: "2022-08-30", totalPrice: 1120},
                    {date: "2022-08-31", totalPrice: 0},
-                   
                    ]
+
+            export const orderOz = [
+                    {date: "2022-08-01", totalPrice:2},
+                    {date: "2022-08-02", totalPrice: 7},
+                    {date: "2022-08-03", totalPrice: 3},
+                    {date: "2022-08-04", totalPrice: 3},
+                    {date: "2022-08-05", totalPrice: 9},
+                    {date: "2022-08-06", totalPrice: 0},
+                    {date: "2022-08-07", totalPrice: 0},
+                    {date: "2022-08-08", totalPrice: 8},
+                    {date: "2022-08-09", totalPrice: 0},
+                    {date: "2022-08-10", totalPrice: 0},
+                   {date: "2022-08-11", totalPrice: 15},
+                   {date: "2022-08-12", totalPrice: 0},
+                   {date: "2022-08-13", totalPrice: 0},
+                   {date: "2022-08-14", totalPrice: 10},
+                   {date: "2022-08-15", totalPrice: 19},
+                   {date: "2022-08-16", totalPrice: 25},
+                   {date: "2022-08-17", totalPrice: 12},
+                   {date: "2022-08-18", totalPrice: 30},
+                   {date: "2022-08-19", totalPrice: 8},
+                   {date: "2022-08-20", totalPrice: 1},
+                   {date: "2022-08-21", totalPrice: 0},
+                   {date: "2022-08-22", totalPrice: 5},
+                   {date: "2022-08-23", totalPrice: 30},
+                   {date: "2022-08-24", totalPrice: 21},
+                   {date: "2022-08-25", totalPrice: 15},
+                   {date: "2022-08-26", totalPrice: 40},
+                   {date: "2022-08-27", totalPrice: 30},
+                   {date: "2022-08-28", totalPrice: 12},
+                   {date: "2022-08-29", totalPrice: 4},
+                   {date: "2022-08-30", totalPrice: 51},
+                   {date: "2022-08-31", totalPrice: 30},
+                   ]
+
+                   export const logisticOz = [
+                    {date: "2022-08-01", userGain: 100},
+                    {date: "2022-08-02", userGain: 300},
+                    {date: "2022-08-03", userGain: 0},
+                    {date: "2022-08-04", userGain: 300},
+                    {date: "2022-08-05", userGain: 0},
+                    {date: "2022-08-06", userGain: 0},
+                    {date: "2022-08-07", userGain: 0},
+                    {date: "2022-08-08", userGain: 87},
+                    {date: "2022-08-09", userGain: 0},
+                    {date: "2022-08-10", userGain: 0},
+                   {date: "2022-08-11", userGain: 0},
+                   {date: "2022-08-12", userGain: 0},
+                   {date: "2022-08-13", userGain: 0},
+                   {date: "2022-08-14", userGain: 0},
+                   {date: "2022-08-15", userGain: 193},
+                   {date: "2022-08-16", userGain: 0},
+                   {date: "2022-08-17", userGain: 0},
+                   {date: "2022-08-18", userGain: 0},
+                   {date: "2022-08-19", userGain: 0},
+                   {date: "2022-08-20", userGain: 0},
+                   {date: "2022-08-21", userGain: 0},
+                   {date: "2022-08-22", userGain: 56},
+                   {date: "2022-08-23", userGain: 0},
+                   {date: "2022-08-24", userGain: 0},
+                   {date: "2022-08-25", userGain: 150},
+                   {date: "2022-08-26", userGain: 0},
+                   {date: "2022-08-27", userGain: 0},
+                   {date: "2022-08-28", userGain: 0},
+                   {date: "2022-08-29", userGain: 0},
+                   {date: "2022-08-30", userGain: 112},
+                   {date: "2022-08-31", userGain: 0},
+                   ]
+
+
+                   export const refundsOZ = [
+                    {date: '2022-08-01', quantity: 4},
+                    {date: '2022-08-02', quantity: 0},
+                    {date: '2022-08-03', quantity: 0},
+                    {date: '2022-08-04', quantity: 0},
+                    {date: '2022-08-05', quantity: 0},
+                    {date: '2022-08-06', quantity: 1},
+                    {date: '2022-08-07', quantity: 0},
+                    {date: '2022-08-08', quantity: 0},
+                    {date: '2022-08-09', quantity: 0},
+                    {date: '2022-08-10', quantity: 0},
+                    {date: '2022-08-11', quantity: 2},
+                    {date: '2022-08-12', quantity: 0},
+                    {date: '2022-08-13', quantity: 0},
+                    {date: '2022-08-14', quantity: 5},
+                    {date: '2022-08-15', quantity: 0},
+                    {date: '2022-08-16', quantity: 0},
+                    {date: '2022-08-17', quantity: 0},
+                    {date: '2022-08-18', quantity: 0},
+                    {date: '2022-08-19', quantity: 0},
+                    {date: '2022-08-20', quantity: 0},
+                    {date: '2022-08-21', quantity: 3},
+                    {date: '2022-08-22', quantity: 0},
+                    {date: '2022-08-23', quantity: 0},
+                    {date: '2022-08-24', quantity: 0},
+                    {date: '2022-08-25', quantity: 1},
+                    {date: '2022-08-26', quantity: 0},
+                    {date: '2022-08-27', quantity: 0},
+                    {date: '2022-08-28', quantity: 0},
+                    {date: '2022-08-29', quantity: 2},
+                    {date: '2022-08-30', quantity: 0},
+                    {date: '2022-08-31', quantity: 0},
+                    ];
+            

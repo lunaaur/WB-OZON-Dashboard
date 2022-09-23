@@ -38,6 +38,21 @@ const [isAllLoad, setAllLoad] = useState(false)
     getBgWB()
   }, [])
 
+  function filtrDate(arr, dataObj) {
+    const from = Date.parse(dataObj.date_from)
+    const to = Date.parse(dataObj.date_to)
+    const resArr = []
+    arr.forEach(element => {
+      if (from < Date.parse(element.rr_dt) && Date.parse(element.rr_dt) < to) {
+        resArr.push(element)
+  
+      }
+    })
+    return resArr.sort((prev, next) => Date.parse(prev.rr_dt) - Date.parse(next.rr_dt));
+  }
+
+
+
   const getApiOzWb = async (e, inputs) => {
 
     const dataTerm = e.target.getAttribute("data-time")
@@ -172,16 +187,16 @@ const [isAllLoad, setAllLoad] = useState(false)
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      {/* {
+      {
         (isAllLoad)? 
         <Watch/>
-        : */}
+        :
         <Index
         isLoadSal={isLoadSal}
         isLoadOrd={isLoadOrd}
         isLoadRef={isLoadRef}
         isLoadLog={isLoadLog} />
-       {/* } */}
+       }
       
     </>
   )
