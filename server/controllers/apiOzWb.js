@@ -391,12 +391,10 @@ exports.BigDataWb = async (req, res) => {
     const wb = await axios.get(`https://suppliers-stats.wildberries.ru/api/v1/supplier/reportDetailByPeriod?key=${process.env.KEY_API_WB}&dateFrom=${req.body.date_from}&dateTo=${req.body.date_to}`, { withCredentials: false });
     res.json({ data: wb.data })
   } catch (error) {
-    console.log(wb);
-    res.status(error.status || 500).json({ message: error.message})
     console.log("Ошибка WB-->", error.message)
-  } finally {
-    console.log(wb);
-}
+   // res.json({ status: error.status, message: error.message})
+   res.status(error.status || 500).json({ description: error.message})
+  } 
 }
 
 exports.apiSalesRefWb = async (req, res) => {

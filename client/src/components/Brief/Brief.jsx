@@ -37,101 +37,107 @@ const Brief = () => {
     const dateFromTo = getDataTimeTerm('lastWeek')
     //const dateFromTo = getDataTimeTerm('90Days')
     dispatch(ReadDate(dateFromTo))
-    // if (!revenueOZ.length) {
-    //   try {
-    //     let resDays90Oz = await axios.post(
-    //       "https://api-seller.ozon.ru/v1/analytics/data",
-    //       {
-    //         date_from: dateFromTo.date_from,
-    //         date_to: dateFromTo.date_to,
-    //         metrics: ["revenue"],
-    //         dimension: ["day"],
-    //         filters: [],
-    //         limit: 1000,
-    //         offset: 0,
-    //       },
-    //       {
-    //         headers: {
-    //           "Client-Id": "108699",
-    //           "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
-    //           "Content-Type": "application/json",
-    //         },
-    //       }
-    //     );
-    //     console.log("61", resDays90Oz.data.result.data);
-    //     dispatch(revenue90Doz(resDays90Oz.data.result.data))
-    //   } catch (error) {
-    //     console.log("esDays90Oz", error.message, error.status)
-    //   }
+    if (!revenueOZ.length) {
+      try {
+        let resDays90Oz = await axios.post(
+          "https://api-seller.ozon.ru/v1/analytics/data",
+          {
+            date_from: dateFromTo.date_from,
+            date_to: dateFromTo.date_to,
+            metrics: ["revenue"],
+            dimension: ["day"],
+            filters: [],
+            limit: 1000,
+            offset: 0,
+          },
+          {
+            headers: {
+              "Client-Id": "108699",
+              "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        console.log("61", resDays90Oz.data.result.data);
+        dispatch(revenue90Doz(resDays90Oz.data.result.data))
+      } catch (error) {
+        console.log("esDays90Oz", error.message, error.status)
+    alert("Слишком много обращений к API OZON")
+      }
 
-    // }
+    }
 
-    // if (!returnOZ.length) {
-    //   try {
+    if (!returnOZ.length) {
+      try {
         
       
-    //   let resreturnsDays90Oz = await axios.post(
-    //     "https://api-seller.ozon.ru/v1/analytics/data",
-    //     {
-    //       date_from: dateFromTo.date_from,
-    //       date_to: dateFromTo.date_to,
-    //       metrics: ["returns"],
-    //       dimension: ["day"],
-    //       filters: [],
-    //       limit: 1000,
-    //       offset: 0,
-    //     },
-    //     {
-    //       headers: {
-    //         "Client-Id": "108699",
-    //         "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
-    //   console.log("85", resreturnsDays90Oz.data.result.data);
-    //   dispatch(returns90Doz(resreturnsDays90Oz.data.result.data))
-    // } catch (error) {
-    //   console.log("resreturnsDays90Oz", error.message, error.status)
-    // }
-    // }
+      let resreturnsDays90Oz = await axios.post(
+        "https://api-seller.ozon.ru/v1/analytics/data",
+        {
+          date_from: dateFromTo.date_from,
+          date_to: dateFromTo.date_to,
+          metrics: ["returns"],
+          dimension: ["day"],
+          filters: [],
+          limit: 1000,
+          offset: 0,
+        },
+        {
+          headers: {
+            "Client-Id": "108699",
+            "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("85", resreturnsDays90Oz.data.result.data);
+      dispatch(returns90Doz(resreturnsDays90Oz.data.result.data))
+    } catch (error) {
+      console.log("resreturnsDays90Oz", error.message, error.status)
+    alert("Слишком много обращений к API OZON returns")
+    }
+    }
 
-    // if (orderUnitsOZ.length) {
-    //   try {
-    //   let resOrderedUnitsDays90Oz = await axios.post(
-    //     "https://api-seller.ozon.ru/v1/analytics/data",
-    //     {
-    //       date_from: dateFromTo.date_from,
-    //       date_to: dateFromTo.date_to,
-    //       metrics: ["returns"],
-    //       dimension: ["day"],
-    //       filters: [],
-    //       limit: 1000,
-    //       offset: 0,
-    //     },
-    //     {
-    //       headers: {
-    //         "Client-Id": "108699",
-    //         "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
-    //         "Content-Type": "application/json",
-    //       },
-    //     }
-    //   );
-    //   console.log("105", resOrderedUnitsDays90Oz.data.result.data);
-    //   dispatch(orderedUnits90Doz(resOrderedUnitsDays90Oz.data.result.data))
-    // } catch (error) {
-    //   console.log("resOrderedUnitsDays90Oz", error.message, error.status)
-    // }
-    // }
+    if (orderUnitsOZ.length) {
+      try {
+      let resOrderedUnitsDays90Oz = await axios.post(
+        "https://api-seller.ozon.ru/v1/analytics/data",
+        {
+          date_from: dateFromTo.date_from,
+          date_to: dateFromTo.date_to,
+          metrics: ["returns"],
+          dimension: ["day"],
+          filters: [],
+          limit: 1000,
+          offset: 0,
+        },
+        {
+          headers: {
+            "Client-Id": "108699",
+            "Api-Key": "9fc423f8-7aed-4237-a28b-e4fdcc172414",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("105", resOrderedUnitsDays90Oz.data.result.data);
+      dispatch(orderedUnits90Doz(resOrderedUnitsDays90Oz.data.result.data))
+    } catch (error) {
+      console.log("resOrderedUnitsDays90Oz", error.message, error.status)
+   alert("Слишком много обращений к API OZON Ordered-Units")
+    }
+    }
 
     if (!bigWB.length) {
       try {
-        let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo);
+        let resBigDwb = await axios.post('http://localhost:3001/getapi/bgwb', dateFromTo).catch(function (error) {
+          console.log(error.toJSON());
+        });;
       console.log("resBigDwb=>>>", resBigDwb.status, resBigDwb );
       console.log("true")
       dispatch(bigDataWb(resBigDwb.data.data))
       } catch (error) {
-        console.log("error", error);  
+        console.log("error", error );  
+        alert("Слишком много обращений к API WB")
       }
       
     }
