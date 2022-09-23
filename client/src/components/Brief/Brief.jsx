@@ -39,7 +39,7 @@ const Brief = () => {
     async function getBgWB() {
       console.log("27")
       
-      const dateFromTo = getDataTimeTerm('90Days')
+      const dateFromTo = getDataTimeTerm('lastWeek')
       console.log(bigWB, '<=== bigWB')
       console.log(revenueOZ, '<=== revenueOZ')
       dispatch(ReadDate(dateFromTo))
@@ -412,17 +412,17 @@ const Brief = () => {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
-      {/* {
+      {
         (isAllLoad)? 
         <Watch/>
-        : */}
-      <Index
+   :
+        <Index
         isLoadSal={isLoadSal}
         isLoadOrd={isLoadOrd}
         isLoadRef={isLoadRef}
         isLoadLog={isLoadLog} />
-      {/* } */}
-
+      }  
+      
     </>
   )
 }
