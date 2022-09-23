@@ -10,19 +10,15 @@ export const OrderTab = () => {
         labels: ordersArray.map((data) => data.date),
         datasets: [
           {
-            label: "Data WB",
+            label: "Данные Wildberries",
             data: ordersArray.map((data) => data.quantity),
             backgroundColor: [
               "rgba(75,192,192,1)",
-              "#ecf0f1",
-              "#50AF95",
-              "#f3ba2f",
-              "#2a71d0",
             ],
             borderColor: "black",
             borderWidth: 2,
           },{
-            label: "Data OZ",
+            label: "Данные Ozon",
             data: DataOzonOrd.map((data) => data.userGain),
             backgroundColor: [
               "red"
@@ -103,7 +99,7 @@ export const OrderTab = () => {
       </thead>
       <tbody>
         <tr>
-          <td>WB</td>
+          <td>Wildberries</td>
           
           <td>{ordersArray.reduce((acc, val)=> {
             return acc + val.quantity
@@ -111,7 +107,7 @@ export const OrderTab = () => {
           }, 0)}</td>
         </tr>
         <tr>
-          <td>OZ</td>
+          <td>Ozon</td>
           
           <td>↑ 4 050 P</td>
         </tr>

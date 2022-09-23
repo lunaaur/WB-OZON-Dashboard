@@ -24,33 +24,21 @@ const Header = () => {
                 <NavDropdown
                     title="Кабинет WB"
                     id={`offcanvasNavbarDropdown-expand-md`}
+                    style={{display: "flex", justifyContent: "center" }}
                   >
-                    <Link to="/wildberries" style={{ textDecoration: 'none', color: "black" }}>Свобка WE</Link>
-                    <NavDropdown.Item href="#action2">
-                      Another action
-                    </NavDropdown.Item>
+                  <NavDropdown.Item><Link to="/wildberries" style={{ textDecoration: 'none', color: "black"}}>Сводка WB</Link></NavDropdown.Item>
                   </NavDropdown>
                   <NavDropdown
                     title="Сводка"
                     id={`offcanvasNavbarDropdown-expand-md`}
                   >
-                    <Link to="/allbrief" style={{ textDecoration: 'none', color: "black" }}>Общая сводка</Link>
-                    <NavDropdown.Item href="#action5">
-                      Another action
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action6">
-                      Something else here
-                    </NavDropdown.Item>
+                  <NavDropdown.Item><Link to="/allbrief" style={{ textDecoration: 'none', color: "black" }}>Общая сводка</Link></NavDropdown.Item>
                   </NavDropdown>
                   <NavDropdown
                     title="Кабинет OZ"
                     id={`offcanvasNavbarDropdown-expand-md`}
                   >
-                    <Link to="/ozon" style={{ textDecoration: 'none', color: "black" }}>Сводка OZ</Link>
-                    <NavDropdown.Item href="#action8">
-                      Another action
-                    </NavDropdown.Item>
+                  <NavDropdown.Item><Link to="/ozon" style={{ textDecoration: 'none', color: "black" }}>Сводка OZ</Link></NavDropdown.Item>
                   </NavDropdown>
                 </Nav>
                 <Form className="d-flex">

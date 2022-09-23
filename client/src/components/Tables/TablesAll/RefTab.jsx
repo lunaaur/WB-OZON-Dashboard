@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import LineChart from '../../Chart/LineChart';
-import { DataWbRefб, returnsArray } from '../../Chart/DataWE';
+import { refundsWB } from '../../Chart/DataWE';
 import { DataOzonRef } from '../../Chart/DataOz';
 import s from "./table.module.css";
 
@@ -36,25 +36,21 @@ export const RefTab = () => {
   }
 
   // console.log('trendLine------>',lineTrend(arrOne, "totalPrice"))
-const WB = lineTrend(returnsArray, "quantity")
+const WB = lineTrend(refundsWB, "quantity")
 
     const [userData, setUserData] = useState({
-        labels: returnsArray.map((data) => data.date),
+        labels: refundsWB.map((data) => data.date),
         datasets: [
           {
-            label: "Data WB",
-            data: returnsArray.map((data) => data.quantity),
+            label: "Данные Wildberries",
+            data: refundsWB.map((data) => data.quantity),
             backgroundColor: [
               "rgba(75,192,192,1)",
-              "#ecf0f1",
-              "#50AF95",
-              "#f3ba2f",
-              "#2a71d0",
             ],
             borderColor: "black",
             borderWidth: 2,
           },{
-            label: "Data OZ",
+            label: "Данные Ozon",
             data: DataOzonRef.map((data) => data.userGain),
             backgroundColor: [
               "red"
@@ -97,19 +93,19 @@ const WB = lineTrend(returnsArray, "quantity")
              <thead>
             <tr>
                 <th></th>
-              <th>Прибыль и коммисия</th>
+              <th>Возврат</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>WB</td>
-              <td>{returnsArray.reduce((acc, val)=> {
+              <td>Wildberries</td>
+              <td>{refundsWB.reduce((acc, val)=> {
             return acc + val.quantity
 
           }, 0)}</td>
             </tr>
             <tr>
-              <td></td>
+              <td>Ozon</td>
               <td>↑ 400050 P</td>
             </tr>
           </tbody>

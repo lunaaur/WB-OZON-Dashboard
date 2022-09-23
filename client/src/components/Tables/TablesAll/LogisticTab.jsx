@@ -43,7 +43,7 @@ const OZ = lineTrend(DataOzonLog, "userGain")
         labels: salesArray.map((data) => data.date),
         datasets: [
           {
-            label: "dataWB",
+            label: "Данные Wildberries",
             data: salesArray.map((data) => data.delivery_rub),
             backgroundColor: [
               "rgba(75,192,192,1)",
@@ -55,7 +55,7 @@ const OZ = lineTrend(DataOzonLog, "userGain")
             borderColor: "black",
             borderWidth: 2,
           },{
-            label: "Data OZ",
+            label: "Данные Ozon",
             data: DataOzonLog.map((data) => data.userGain),
             backgroundColor: [
               "red"
@@ -103,14 +103,14 @@ const OZ = lineTrend(DataOzonLog, "userGain")
           </thead>
           <tbody>
             <tr>
-              <td>WB</td>
+              <td>Wildberries</td>
               <td>{salesArray.reduce((acc, val)=> {
             return acc + val.delivery_rub
 
           }, 0)}</td>
             </tr>
             <tr>
-              <td>OZ</td>
+              <td>Ozon</td>
               <td>↑ 31 450 P</td>
             </tr>
           </tbody>
